@@ -344,7 +344,7 @@
             console.log('Sending order data:', orderData); // Debug log
 
             // Send order to backend
-            const saveOrderRes = await fetch('http://localhost:5000/api/orders', {
+            const saveOrderRes = await fetch('https://ace-agro-backend.onrender.com/api/orders', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

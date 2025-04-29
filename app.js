@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 const productRoutes = require('./routes/productRoutes');
 const inquiryRoutes = require('./routes/inquiryRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/inquiries', inquiryRoutes);
-
+app.use('/api/orders', orderRoutes);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB connected');
