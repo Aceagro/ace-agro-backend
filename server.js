@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const csv = require('csv-parser');
 
 const app = express();
 
@@ -53,6 +55,31 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+});
+
+// Load pin codes from CSV
+const pinCodes = [];
+fs.createReadStream('pin_codes.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    pinCodes.push(row.pincode);
+  })
+  .on('end', () => {
+    console.log('Pin codes loaded:', pinCodes.length);
+  })
+  .on('error', (error) => {
+    console.error('Error reading pin_codes.csv:', error);
+  });
+
+// Pincode check endpoint
+app.get('/api/check-pincode', (req, res) => {
+  const pin = req.query.pin;
+  if (!pin || !/^\d{6}$/.test(pin)) {
+    return res.status(400).json({ error: 'Invalid pincode' });
+  }
+
+  const isAvailable = pinCodes.includes(pin);
+  res.json({ available: isAvailable });
 });
 
 // API Endpoint to Save Order
