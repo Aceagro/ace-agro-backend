@@ -1,44 +1,175 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
 
-<!DOCTYPE html>
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Terms and Conditions - Ace Agro Tech</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Poppins', sans-serif; padding: 40px; background: #f5f7f5; color: #333; line-height: 1.6; }
-    h1 { text-align: center; color: #2e7d32; margin-bottom: 30px; }
-    p { margin-bottom: 20px; font-size: 1.1em; }
-    footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #888; }
-    a { color: #2e7d32; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read the Terms and Conditions of Ace Agro Tech, covering product disclaimers, orders, payments, returns, and more.">
+    <title>Terms and Conditions - Ace Agro Tech</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            background-color: #1b5e20;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #c8e6c9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .terms-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .terms-section h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        .terms-section h3 {
+            color: #1b5e20;
+            margin-top: 20px;
+        }
+        .terms-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+        .terms-section a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+        .terms-section a:hover {
+            text-decoration: underline;
+        }
+        footer {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Ace Agro Tech</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="terms-section">
+            <h2>Terms and Conditions</h2>
+            <p>Welcome to Ace Agro Tech! Please read these terms carefully before using our website or purchasing our plants.</p>
 
-<h1>Terms and Conditions</h1>
+            <h3>1. Product Disclaimer</h3>
+            <p>Plant health and growth depend on the environment and care provided. Images shown are for reference purposes only.</p>
 
-<p>Welcome to Ace Agro Tech! Please read these terms carefully before using our website or purchasing our plants.</p>
+            <h3>2. Orders and Payments</h3>
+            <p>All transactions are processed securely. We are not responsible for any banking charges incurred during transactions.</p>
 
-<h2>1. Product Disclaimer</h2>
-<p>Plant health and growth depend on the environment and care provided. Images shown are for reference purposes only.</p>
+            <h3>3. Return Policy</h3>
+            <p>All sales are final. However, if you receive damaged plants, please report it within 24 hours of delivery. <strong>Refunds will be executed manually only if an opening video is sent as proof.</strong></p>
 
-<h2>2. Orders and Payments</h2>
-<p>All transactions are processed securely. We are not responsible for any banking charges incurred during transactions.</p>
+            <h3>4. Privacy Policy</h3>
+            <p>We respect your privacy and ensure that your information is securely stored and not shared with third parties.</p>
 
-<h2>3. Return Policy</h2>
-<p>All sales are final. However, if you receive damaged plants, please report it within 24 hours of delivery.</p>
+            <h3>5. False Reviews and Comments</h3>
+            <p>Submitting false reviews or comments about our products and services will result in a <strong>fine of ₹10,000 INR or more</strong>. This is to ensure fair representation and to protect the reputation of Ace Agro Tech.</p>
 
-<h2>4. Privacy Policy</h2>
-<p>We respect your privacy and ensure that your information is securely stored and not shared with third parties.</p>
+            <h3>6. Chargebacks and Social Reputation</h3>
+            <p>Engaging in <strong>false Razorpay chargebacks</strong> or any actions that <strong>hamper our social reputation</strong> will lead to legal cases. Such actions are taken very seriously and may incur penalties.</p>
 
-<h2>5. Contact Us</h2>
-<p>If you have any questions about these Terms, please contact us at <a href="mailto:contact.ace.agro@gmail.com">contact.ace.agro@gmail.com</a>.</p>
+            <h3>7. Legal Jurisdiction</h3>
+            <p>Any legal cases arising from disputes must be resolved in the <strong>CGR Court</strong>. By using this website, you agree to proceed with any legal actions in this court if required.</p>
 
-<footer>
-  &copy; 2025 Ace Agro Tech. All rights reserved.
-</footer>
+            <h3>8. Governing Law</h3>
+            <p>These Terms and Conditions will be governed by and construed in accordance with the laws of India.</p>
 
-</body>
+            <h3>9. Modifications to Terms</h3>
+            <p>Ace Agro Tech reserves the right to update or modify these terms at any time without prior notice. Any changes will be posted on this page.</p>
+
+            <h3>10. Contact Us</h3>
+            <p>If you have any questions about these Terms, please contact us at:  
+            <a href="/cdn-cgi/l/email-protection#4c2f2322382d2f38622d2f29622d2b3e230c2b212d2520622f2321"><span class="__cf_email__" data-cfemail="c7a4a8a9b3a6a4b3e9a6a4a2e9a6a0b5a887a0aaa6aeabe9a4a8aa">[email&#160;protected]</span></a></p>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Ace Agro Tech. All rights reserved.</p>
+    </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b7151229bbafaa',t:'MTc0NjUxOTg3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

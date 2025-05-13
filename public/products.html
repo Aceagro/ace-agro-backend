@@ -71,6 +71,42 @@
       color: #ffca28;
       text-decoration: none;
     }
+.search-bar {
+  text-align: center;
+  padding: 20px;
+  background: #e8f5e9;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.search-bar input {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.search-bar input:focus {
+  border-color: #2e7d32;
+}
+.product-card {
+  display: none; /* Hidden by default */
+}
+.product-card.visible {
+  display: block; /* Shown when matching search */
+}
+@media (max-width: 768px) {
+  .search-bar input {
+    font-size: 0.9em;
+    padding: 8px 15px;
+  }
+}
+@media (max-width: 480px) {
+  .search-bar input {
+    font-size: 0.8em;
+  }
+}
   </style>
 </head>
 <body>
@@ -80,6 +116,9 @@
   <a href="cart.html" style="display: inline-block; padding-right: 20px;">Proceed to Cart 🛒</a>
   <h1>Our Product Collection</h1>
 </header>
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search for plants (e.g., Peace Lily, air-purifying)">
+</div>
 
 <section class="product-grid">
   <div class="product-card">
@@ -125,7 +164,7 @@
   </div>
 
   <div class="product-card" data-id="luckybamboo1stalk">
-    <img src="images/lucky_bamboo_1stalk.jpg" alt="Lucky Bamboo 1 Stalk">
+    <img src="images/lucky_bamboo_1stalk.png" alt="Lucky Bamboo 1 Stalk">
     <h3>Lucky Bamboo Stalk (A Symbol of Commitment)</h3>
     <p>Perfect gift plant for commitment. ₹199</p>
     <button class="add-to-cart" onclick="addToCart('luckybamboo1stalk', 'Lucky Bamboo Stalk (A Symbol of Commitment)', 199)">Add to Cart</button>
@@ -139,7 +178,7 @@
   </div>
 
   <div class="product-card" data-id="luckybamboo2stalks">
-    <img src="images/lucky_bamboo_1stalk.jpg" alt="Lucky Bamboo 2 Stalks">
+    <img src="images/lucky_bamboo_2stalk.png" alt="Lucky Bamboo 2 Stalks">
     <h3>2 Lucky Bamboo Stalks (A Symbol of Love)</h3>
     <p>Ideal gift to express love. ₹299</p>
     <button class="add-to-cart" onclick="addToCart('luckybamboo2stalks', '2 Lucky Bamboo Stalks (A Symbol of Love)', 299)">Add to Cart</button>
@@ -153,21 +192,21 @@
   </div>
 
   <div class="product-card" data-id="luckybamboo3layervase">
-    <img src="images/lucky_bamboo_3layer_vase.jpg" alt="3 Layer Lucky Bamboo Vase">
+    <img src="images/lucky_bamboo_3layer_vase.png" alt="3 Layer Lucky Bamboo Vase">
     <h3>3 Layer Lucky Bamboo in a Glass Vase with Pebbles</h3>
     <p>Stylish and lucky addition to your space. ₹499</p>
     <button class="add-to-cart" onclick="addToCart('luckybamboo3layervase', '3 Layer Lucky Bamboo in a Glass Vase with Pebbles', 499)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="luckybamboo3layerbowl">
-    <img src="images/lucky_bamboo_3layer_bowl.jpg" alt="3 Layer Lucky Bamboo Bowl">
+    <img src="images/lucky_bamboo_3layer_vase.png" alt="3 Layer Lucky Bamboo Bowl">
     <h3>3 Layer Lucky Bamboo Plant in a Bowl with Pebbles</h3>
     <p>Enhances positivity and decor. ₹449</p>
     <button class="add-to-cart" onclick="addToCart('luckybamboo3layerbowl', '3 Layer Lucky Bamboo Plant in a Bowl with Pebbles', 449)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="luckybamboo3stalks">
-    <img src="images/lucky_bamboo_3stalks.jpg" alt="Lucky Bamboo 3 Stalks">
+    <img src="images/lucky_bamboo_3stalks.png" alt="Lucky Bamboo 3 Stalks">
     <h3>3 Lucky Bamboo Stalks (A Symbol of Happiness)</h3>
     <p>Brings joy as a gift plant. ₹399</p>
     <button class="add-to-cart" onclick="addToCart('luckybamboo3stalks', '3 Lucky Bamboo Stalks (A Symbol of Happiness)', 399)">Add to Cart</button>
@@ -194,12 +233,7 @@
     <button class="add-to-cart" onclick="addToCart('luckybamboo30cmspiralpack6', '30 cm Spiral Stick Lucky Bamboo Plant - (Pack of 6)', 1699)">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-id="luckybamboo4layerbowl">
-    <img src="images/lucky_bamboo_4layer_bowl.jpg" alt="4 Layer Lucky Bamboo">
-    <h3>4 Layer Lucky Bamboo Plant in a Bowl with Pebbles</h3>
-    <p>Symbol of growth and abundance. ₹599</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo4layerbowl', '4 Layer Lucky Bamboo Plant in a Bowl with Pebbles', 599)">Add to Cart</button>
-  </div>
+  
 
   <div class="product-card" data-id="moneyplantshanging">
     <img src="images/money_plants_hanging.jpg" alt="4 Money Plants in Hanging Baskets">
@@ -208,81 +242,11 @@
     <button class="add-to-cart" onclick="addToCart('moneyplantshanging', '4 Money Plants in Hanging Baskets', 799)">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-id="luckybamboo5layerbowl">
-    <img src="images/lucky_bamboo_5layer_bowl.jpg" alt="5 Layer Lucky Bamboo">
-    <h3>5 Layer Lucky Bamboo Plant in a Bowl with Pebbles</h3>
-    <p>Promotes balance and harmony. ₹699</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo5layerbowl', '5 Layer Lucky Bamboo Plant in a Bowl with Pebbles', 699)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo5layertray">
-    <img src="images/lucky_bamboo_5layer_tray.jpg" alt="5 Layer Pyramid Lucky Bamboo">
-    <h3>5 Layer Pyramid Lucky Bamboo in a Tray with Pebbles</h3>
-    <p>Unique pyramid design for luck. ₹799</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo5layertray', '5 Layer Pyramid Lucky Bamboo in a Tray with Pebbles', 799)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo5stalks">
-    <img src="images/lucky_bamboo_5stalks.jpg" alt="Lucky Bamboo 5 Stalks">
-    <h3>5 Lucky Bamboo Stalks (A Symbol of Positive Energy)</h3>
-    <p>Boosts positive vibes as a gift. ₹499</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo5stalks', '5 Lucky Bamboo Stalks (A Symbol of Positive Energy)', 499)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo6layerbowl">
-    <img src="images/lucky_bamboo_6layer_bowl.jpg" alt="6 Layer Lucky Bamboo">
-    <h3>6 Layer Lucky Bamboo Plant in a Bowl with Pebbles</h3>
-    <p>Symbolizes good health and fortune. ₹799</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo6layerbowl', '6 Layer Lucky Bamboo Plant in a Bowl with Pebbles', 799)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo60cmspiral">
-    <img src="images/lucky_bamboo_60cm_spiral.jpg" alt="60 cm Spiral Lucky Bamboo">
-    <h3>60 cm Spiral Stick Lucky Bamboo Plant</h3>
-    <p>Tall and elegant spiral design. ₹599</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo60cmspiral', '60 cm Spiral Stick Lucky Bamboo Plant', 599)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo60cmspiralpack3">
-    <img src="images/lucky_bamboo_60cm_spiral_pack3.jpg" alt="60 cm Spiral Lucky Bamboo Pack of 3">
-    <h3>60 cm Spiral Stick Lucky Bamboo Plant - (Pack of 3)</h3>
-    <p>Ideal for larger spaces or gifting. ₹1499</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo60cmspiralpack3', '60 cm Spiral Stick Lucky Bamboo Plant - (Pack of 3)', 1499)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo7layerbowl">
-    <img src="images/lucky_bamboo_7layer_bowl.jpg" alt="7 Layer Lucky Bamboo">
-    <h3>7 Layer Lucky Bamboo Plant in a Bowl with Pebbles</h3>
-    <p>Enhances prosperity and luck. ₹899</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo7layerbowl', '7 Layer Lucky Bamboo Plant in a Bowl with Pebbles', 899)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo8layerbowl">
-    <img src="images/lucky_bamboo_8layer_bowl.jpg" alt="8 Layer Lucky Bamboo">
-    <h3>8 Layer Lucky Bamboo Plant in a Bowl</h3>
-    <p>Symbolizes wealth and abundance. ₹999</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo8layerbowl', '8 Layer Lucky Bamboo Plant in a Bowl', 999)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="luckybamboo9layerbowl">
-    <img src="images/lucky_bamboo_9layer_bowl.jpg" alt="9 Layer Lucky Bamboo">
-    <h3>9 Layer Lucky Bamboo Plant in a Bowl</h3>
-    <p>Promotes longevity and success. ₹1099</p>
-    <button class="add-to-cart" onclick="addToCart('luckybamboo9layerbowl', '9 Layer Lucky Bamboo Plant in a Bowl', 1099)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="adansoniadigitata">
+    <div class="product-card" data-id="adansoniadigitata">
     <img src="images/adansonia_digitata.jpg" alt="Adansonia digitata">
     <h3>Adansonia digitata</h3>
     <p>Unique Baobab tree for exotic appeal. ₹599</p>
     <button class="add-to-cart" onclick="addToCart('adansoniadigitata', 'Adansonia digitata', 599)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="adenantherapavonina">
-    <img src="images/adenanthera_pavonina.jpg" alt="Adenanthera Pavonina">
-    <h3>Adenanthera Pavonina, Ratan Gunj</h3>
-    <p>Ornamental plant with vibrant seeds. ₹399</p>
-    <button class="add-to-cart" onclick="addToCart('adenantherapavonina', 'Adenanthera Pavonina, Ratan Gunj', 399)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="adeniumobesum">
@@ -353,27 +317,6 @@
     <h3>Adenium Plant, Desert Rose (White)</h3>
     <p>Pure white flowers for serenity. ₹499</p>
     <button class="add-to-cart" onclick="addToCart('adeniumwhite', 'Adenium Plant, Desert Rose (White)', 499)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="africanmarigoldanycolor">
-    <img src="images/african_marigold_anycolor.jpg" alt="African Marigold Any Color">
-    <h3>African Marigold (Any Color)</h3>
-    <p>Vibrant blooms for your garden. ₹149</p>
-    <button class="add-to-cart" onclick="addToCart('africanmarigoldanycolor', 'African Marigold (Any Color)', 149)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="africanmarigoldorange">
-    <img src="images/african_marigold_orange.jpg" alt="African Marigold Orange">
-    <h3>African Marigold (Orange)</h3>
-    <p>Bright orange flowers for vibrancy. ₹149</p>
-    <button class="add-to-cart" onclick="addToCart('africanmarigoldorange', 'African Marigold (Orange)', 149)">Add to Cart</button>
-  </div>
-
-  <div class="product-card" data-id="africanmarigoldyellow">
-    <img src="images/african_marigold_yellow.jpg" alt="African Marigold Yellow">
-    <h3>African Marigold (Yellow)</h3>
-    <p>Sunny yellow blooms for cheer. ₹149</p>
-    <button class="add-to-cart" onclick="addToCart('africanmarigoldyellow', 'African Marigold (Yellow)', 149)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="africanvioletanycolor">
@@ -657,21 +600,21 @@
   </div>
 
   <div class="product-card" data-id="bakulmaulsari">
-    <img src="images/bakul_maulsari.jpg" alt="Bakul Maulsari">
+    <img src="images/bakul_maulsari.png" alt="Bakul Maulsari">
     <h3>Bakul, Maulsari, Vajradhanthi</h3>
     <p>Fragrant flowering tree. ₹599</p>
     <button class="add-to-cart" onclick="addToCart('bakulmaulsari', 'Bakul, Maulsari, Vajradhanthi', 599)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="bakulanuradhanakshatra">
-    <img src="images/bakul_anuradha_nakshatra.jpg" alt="Bakul Anuradha Nakshatra">
+    <img src="images/bakul_anuradha_nakshatra.png" alt="Bakul Anuradha Nakshatra">
     <h3>Bakul, Tree of Anuradha Nakshatra, Scorpio or Vrishchik Rashi</h3>
     <p>Culturally significant fragrant tree. ₹649</p>
     <button class="add-to-cart" onclick="addToCart('bakulanuradhanakshatra', 'Bakul, Tree of Anuradha Nakshatra, Scorpio or Vrishchik Rashi', 649)">Add to Cart</button>
   </div>
 
   <div class="product-card" data-id="bamboograss">
-    <img src="images/bamboo_grass.jpg" alt="Bamboo Grass">
+    <img src="images/bamboo_grass.png" alt="Bamboo Grass">
     <h3>Bamboo Grass</h3>
     <p>Ornamental grass for landscaping. ₹299</p>
     <button class="add-to-cart" onclick="addToCart('bamboograss', 'Bamboo Grass', 299)">Add to Cart</button>
@@ -782,13 +725,6 @@
     <button class="add-to-cart" onclick="addToCart('best3tabletopplants', 'Best 3 Table top / Office Desk Plants to Bring Prosperity', 649)">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-id="best4classicairplants">
-    <img src="images/best_4_classic_air_plants.jpg" alt="Best 4 Classic Air Plants Pack">
-    <h3>Best 4 Classic Air Plants Pack</h3>
-    <p>Unique air plants for decor. ₹799</p>
-    <button class="add-to-cart" onclick="addToCart('best4classicairplants', 'Best 4 Classic Air Plants Pack', 799)">Add to Cart</button>
-  </div>
-
   <div class="product-card" data-id="best4pollutionkillers">
     <img src="images/best_4_pollution_killers.jpg" alt="Best 4 Plants to Kill Indoor Pollution">
     <h3>Best 4 Plants to Kill Indoor Pollution</h3>
@@ -873,654 +809,2812 @@
     <button class="add-to-cart" onclick="addToCart('bougainvilleawhite', 'Bougainvillea (White)', 299)">Add to Cart</button>
   </div>
 
-  <div class="product-card">
+  <div class="product-card" data-id="bougainvilleayellow">
     <img src="images/bougainvillea_yellow.jpg" alt="Bougainvillea Yellow">
     <h3>Bougainvillea (Yellow)</h3>
     <p>Sunny yellow flowers. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('bougainvilleayellow', 'Bougainvillea (Yellow)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chamaedoreaelegans">
     <img src="images/chamaedorea_elegans.jpg" alt="Chamaedorea elegans Parlour Palm">
     <h3>Chamaedorea elegans, Parlour Palm</h3>
     <p>Compact indoor palm. ₹399</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chamaedoreaelegans', 'Chamaedorea elegans, Parlour Palm', 399)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chamaedoreaeleganssmall">
     <img src="images/chamaedorea_elegans_small.jpg" alt="Chamaedorea elegans Parlour Palm Small">
     <h3>Chamaedorea elegans, Parlour Palm (Small)</h3>
     <p>Small air-purifying palm. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chamaedoreaeleganssmall', 'Chamaedorea elegans, Parlour Palm (Small)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="charmingchampapack3">
     <img src="images/charming_champa_pack3.jpg" alt="Charming Champa Pack of 3">
     <h3>Charming Champa (Pack of 3) Plants</h3>
     <p>Fragrant champa plants. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('charmingchampapack3', 'Charming Champa (Pack of 3) Plants', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chikoografted">
     <img src="images/chikoo_grafted.jpg" alt="Chikoo Sapota Grafted">
     <h3>Chikoo, Sapota, Chiku Fruit (Grafted)</h3>
     <p>High-yield grafted fruit tree. ₹899</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chikoografted', 'Chikoo, Sapota, Chiku Fruit (Grafted)', 899)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chikooseeds">
     <img src="images/chikoo_seeds.jpg" alt="Chikoo Sapota Grown Through Seeds">
     <h3>Chikoo, Sapota, Chiku Fruit (Grown Through Seeds)</h3>
     <p>Fruit tree from seeds. ₹699</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chikooseeds', 'Chikoo, Sapota, Chiku Fruit (Grown Through Seeds)', 699)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chinesebanyan">
     <img src="images/chinese_banyan.jpg" alt="Chinese Banyan Ficus Microcarpa">
     <h3>Chinese Banyan, Ficus Microcarpa nitida (Retusa)</h3>
     <p>Ornamental bonsai tree. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chinesebanyan', 'Chinese Banyan, Ficus Microcarpa nitida (Retusa)', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="chinesejuniper">
     <img src="images/chinese_juniper.jpg" alt="Chinese Juniper Juniperus chinensis">
     <h3>Chinese Juniper, Juniperus chinensis expansa variegata</h3>
     <p>Variegated bonsai plant. ₹449</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('chinesejuniper', 'Chinese Juniper, Juniperus chinensis expansa variegata', 449)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="christmastree">
     <img src="images/christmas_tree.jpg" alt="Christmas Tree">
     <h3>Christmas Tree</h3>
     <p>Festive seasonal plant. ₹599</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('christmastree', 'Christmas Tree', 599)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cloves">
     <img src="images/cloves.jpg" alt="Cloves">
     <h3>Cloves</h3>
     <p>Spice-producing tree. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cloves', 'Cloves', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleusgreenmaroon">
     <img src="images/coleus_green_maroon.jpg" alt="Coleus Green Maroon">
     <h3>Coleus (Green Maroon)</h3>
     <p>Colorful foliage plant. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleusgreenmaroon', 'Coleus (Green Maroon)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleusgreenpink">
     <img src="images/coleus_green_pink.jpg" alt="Coleus Green Pink">
     <h3>Coleus (Green Pink)</h3>
     <p>Vibrant green and pink leaves. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleusgreenpink', 'Coleus (Green Pink)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleusgreen">
     <img src="images/coleus_green.jpg" alt="Coleus Green">
     <h3>Coleus (Green)</h3>
     <p>Lush green foliage. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleusgreen', 'Coleus (Green)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleusmaroongreen">
     <img src="images/coleus_maroon_green.jpg" alt="Coleus Maroon Green">
     <h3>Coleus (Maroon Green)</h3>
     <p>Striking maroon-green leaves. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleusmaroongreen', 'Coleus (Maroon Green)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleusmaroon">
     <img src="images/coleus_maroon.jpg" alt="Coleus Maroon">
     <h3>Coleus (Maroon)</h3>
     <p>Deep maroon foliage. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleusmaroon', 'Coleus (Maroon)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="coleuspink">
     <img src="images/coleus_pink.jpg" alt="Coleus Pink">
     <h3>Coleus (Pink)</h3>
     <p>Bright pink leaves for decor. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('coleuspink', 'Coleus (Pink)', 199)">Add to Cart</button>
+</div>
 
-  <!-- New Products -->
-  <div class="product-card">
+<div class="product-card" data-id="crassulaovata">
     <img src="images/crassula_ovata.jpg" alt="Crassula ovata">
     <h3>Crassula ovata, Jade Plant</h3>
     <p>Succulent plant for prosperity. ₹229</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('crassulaovata', 'Crassula ovata, Jade Plant', 229)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="creepingfig">
     <img src="images/creeping_fig.jpg" alt="Creeping Fig">
     <h3>Creeping Fig Plant, Ficus pumila</h3>
     <p>Ground cover for walls. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('creepingfig', 'Creeping Fig Plant, Ficus pumila', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="crotongolddustbig">
     <img src="images/croton_gold_dust_big.jpg" alt="Croton Gold Dust Big">
     <h3>Croton Plant, Codiaeum variegatum (Gold Dust, Big Leaves)</h3>
     <p>Golden speckled large leaves. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('crotongolddustbig', 'Croton Plant, Codiaeum variegatum (Gold Dust, Big Leaves)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="crotongolddustsmall">
     <img src="images/croton_gold_dust_small.jpg" alt="Croton Gold Dust Small">
     <h3>Croton Plant, Codiaeum variegatum (Gold Dust, Small Leaves)</h3>
     <p>Golden speckled small leaves. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('crotongolddustsmall', 'Croton Plant, Codiaeum variegatum (Gold Dust, Small Leaves)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="crotongolddustthin">
     <img src="images/croton_gold_dust_thin.jpg" alt="Croton Gold Dust Thin">
     <h3>Croton Plant, Codiaeum variegatum (Gold Dust, Thin Leaves)</h3>
     <p>Golden speckled thin leaves. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('crotongolddustthin', 'Croton Plant, Codiaeum variegatum (Gold Dust, Thin Leaves)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="crotonmagnificent">
     <img src="images/croton_magnificent.jpg" alt="Croton Magnificent">
     <h3>Croton Plant, Codiaeum variegatum (Magnificent)</h3>
     <p>Stunning multicolored foliage. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('crotonmagnificent', 'Croton Plant, Codiaeum variegatum (Magnificent)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cupressusgolden">
     <img src="images/cupressus_golden.jpg" alt="Cupressus Golden">
     <h3>Cupressus Golden, Golden Monterey Cypress</h3>
     <p>Ornamental golden conifer. ₹399</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cupressusgolden', 'Cupressus Golden, Golden Monterey Cypress', 399)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cupressuslindleyi">
     <img src="images/cupressus_lindleyi.jpg" alt="Cupressus lindleyi">
     <h3>Cupressus lindleyi</h3>
     <p>Unique cypress for landscaping. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cupressuslindleyi', 'Cupressus lindleyi', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="curryleaves">
     <img src="images/curry_leaves.jpg" alt="Curry Leaves">
     <h3>Curry Leaves, Kadi Patta, Murraya koenigii, Meetha Neem</h3>
     <p>Culinary herb for kitchens. ₹149</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('curryleaves', 'Curry Leaves, Kadi Patta, Murraya koenigii, Meetha Neem', 149)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cycas">
     <img src="images/cycas.jpg" alt="Cycas">
     <h3>Cycas Plant</h3>
     <p>Exotic palm-like plant. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cycas', 'Cycas Plant', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cypressgolden">
     <img src="images/cypress_golden.jpg" alt="Cypress Golden">
     <h3>Cypress Golden</h3>
     <p>Golden foliage for decor. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cypressgolden', 'Cypress Golden', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="cypressgreen">
     <img src="images/cypress_green.jpg" alt="Cypress Green">
     <h3>Cypress Green</h3>
     <p>Lush green conifer. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('cypressgreen', 'Cypress Green', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="datepalm">
     <img src="images/date_palm.jpg" alt="Date Palm">
     <h3>Date Palm</h3>
     <p>Fruit-bearing tropical palm. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('datepalm', 'Date Palm', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="datura">
     <img src="images/datura.jpg" alt="Datura">
     <h3>Datura, Dhatura</h3>
     <p>Ornamental and medicinal plant. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('datura', 'Datura, Dhatura', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="deadrattree">
     <img src="images/dead_rat_tree.jpg" alt="Dead Rat Tree">
     <h3>Dead Rat Tree, Adansonia Digitata</h3>
     <p>Unique baobab variety. ₹599</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('deadrattree', 'Dead Rat Tree, Adansonia Digitata', 599)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dendrobiumorchid">
     <img src="images/dendrobium_orchid.jpg" alt="Dendrobium Orchid">
     <h3>Dendrobium Orchid</h3>
     <p>Elegant flowering orchid. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dendrobiumorchid', 'Dendrobium Orchid', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dendrobiumorchidpack2">
     <img src="images/dendrobium_orchid_pack2.jpg" alt="Dendrobium Orchid Pack of 2">
     <h3>Dendrobium Orchid plants - Pack of 2</h3>
     <p>Two vibrant orchid plants. ₹899</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dendrobiumorchidpack2', 'Dendrobium Orchid plants - Pack of 2', 899)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthusanycolor">
     <img src="images/dianthus_anycolor.jpg" alt="Dianthus Any Color">
     <h3>Dianthus (Any Color)</h3>
     <p>Fragrant garden flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthusanycolor', 'Dianthus (Any Color)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthusdarkpink">
     <img src="images/dianthus_darkpink.jpg" alt="Dianthus Dark Pink">
     <h3>Dianthus (Dark Pink)</h3>
     <p>Deep pink blooms. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthusdarkpink', 'Dianthus (Dark Pink)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthuspinkwhite">
     <img src="images/dianthus_pinkwhite.jpg" alt="Dianthus Pink White">
     <h3>Dianthus (Pink White)</h3>
     <p>Bicolored pink and white flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthuspinkwhite', 'Dianthus (Pink White)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthuspink">
     <img src="images/dianthus_pink.jpg" alt="Dianthus Pink">
     <h3>Dianthus (Pink)</h3>
     <p>Soft pink flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthuspink', 'Dianthus (Pink)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthusred">
     <img src="images/dianthus_red.jpg" alt="Dianthus Red">
     <h3>Dianthus (Red)</h3>
     <p>Bold red blooms. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthusred', 'Dianthus (Red)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthuswhitepink">
     <img src="images/dianthus_whitepink.jpg" alt="Dianthus White Pink">
     <h3>Dianthus (White Pink)</h3>
     <p>Bicolored white and pink flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthuswhitepink', 'Dianthus (White Pink)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dianthuswhite">
     <img src="images/dianthus_white.jpg" alt="Dianthus White">
     <h3>Dianthus (White)</h3>
     <p>Pure white blooms. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dianthuswhite', 'Dianthus (White)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dragonfruit">
     <img src="images/dragon_fruit.jpg" alt="Dragon Fruit">
     <h3>Dragon Fruit</h3>
     <p>Exotic fruiting cactus. ₹599</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dragonfruit', 'Dragon Fruit', 599)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="drumsticks">
     <img src="images/drumsticks.jpg" alt="Drumsticks">
     <h3>Drumsticks, Moringa Oleifera</h3>
     <p>Nutritious vegetable tree. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('drumsticks', 'Drumsticks, Moringa Oleifera', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="elephantbushvariegated">
     <img src="images/elephant_bush_variegated.jpg" alt="Elephant Bush Variegated">
     <h3>Elephant bush, Portulacaria afra variegata, Jade plant (Variegated, Hanging basket)</h3>
     <p>Variegated succulent for hanging decor. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('elephantbushvariegated', 'Elephant bush, Portulacaria afra variegata, Jade plant (Variegated, Hanging basket)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="elephantbushgreen">
     <img src="images/elephant_bush_green.jpg" alt="Elephant Bush Green">
     <h3>Elephant bush, Portulacaria afra, Jade plant (Green)</h3>
     <p>Lush green succulent. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('elephantbushgreen', 'Elephant bush, Portulacaria afra, Jade plant (Green)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="elephantbushhanging">
     <img src="images/elephant_bush_hanging.jpg" alt="Elephant Bush Hanging">
     <h3>Elephant bush, Portulacaria afra, Jade plant (Hanging Basket)</h3>
     <p>Green succulent for hanging decor. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('elephantbushhanging', 'Elephant bush, Portulacaria afra, Jade plant (Hanging Basket)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishroseanycolor">
     <img src="images/english_rose_anycolor.jpg" alt="English Rose Any Color">
     <h3>English Rose (Any Color)</h3>
     <p>Classic rose variety. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishroseanycolor', 'English Rose (Any Color)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishroseorange">
     <img src="images/english_rose_orange.jpg" alt="English Rose Orange">
     <h3>English Rose (Orange)</h3>
     <p>Vibrant orange roses. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishroseorange', 'English Rose (Orange)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishrosepink">
     <img src="images/english_rose_pink.jpg" alt="English Rose Pink">
     <h3>English Rose (Pink)</h3>
     <p>Soft pink roses. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishrosepink', 'English Rose (Pink)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishrosered">
     <img src="images/english_rose_red.jpg" alt="English Rose Red">
     <h3>English Rose (Red)</h3>
     <p>Bold red roses. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishrosered', 'English Rose (Red)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishrosewhite">
     <img src="images/english_rose_white.jpg" alt="English Rose White">
     <h3>English Rose (White)</h3>
     <p>Pure white roses. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishrosewhite', 'English Rose (White)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="englishroseyellow">
     <img src="images/english_rose_yellow.jpg" alt="English Rose Yellow">
     <h3>English Rose (Yellow)</h3>
     <p>Bright yellow roses. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('englishroseyellow', 'English Rose (Yellow)', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="euphorbiaanycolor">
     <img src="images/euphorbia_anycolor.jpg" alt="Euphorbia Any Color">
     <h3>Euphorbia (Any Color)</h3>
     <p>Unique succulent variety. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('euphorbiaanycolor', 'Euphorbia (Any Color)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="euphorbiapeach">
     <img src="images/euphorbia_peach.jpg" alt="Euphorbia Peach">
     <h3>Euphorbia (Peach)</h3>
     <p>Peach-colored succulent. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('euphorbiapeach', 'Euphorbia (Peach)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="euphorbiapinkgreen">
     <img src="images/euphorbia_pinkgreen.jpg" alt="Euphorbia Pink Green">
     <h3>Euphorbia (Pink - Green)</h3>
     <p>Pink and green foliage. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('euphorbiapinkgreen', 'Euphorbia (Pink - Green)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="euphorbiared">
     <img src="images/euphorbia_red.jpg" alt="Euphorbia Red">
     <h3>Euphorbia (Red)</h3>
     <p>Vivid red succulent. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('euphorbiared', 'Euphorbia (Red)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="euphorbiawhite">
     <img src="images/euphorbia_white.jpg" alt="Euphorbia White">
     <h3>Euphorbia (White)</h3>
     <p>White-flowered succulent. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('euphorbiawhite', 'Euphorbia (White)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficusbenjaminavariegata">
     <img src="images/ficus_benjamina_variegata.jpg" alt="Ficus benjamina variegata">
     <h3>Ficus benjamina variegata, Variegated Weeping Fig</h3>
     <p>Variegated indoor tree. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficusbenjaminavariegata', 'Ficus benjamina variegata, Variegated Weeping Fig', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficusbenjamina">
     <img src="images/ficus_benjamina.jpg" alt="Ficus Benjamina">
     <h3>Ficus Benjamina, Weeping Fig</h3>
     <p>Lush indoor foliage. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficusbenjamina', 'Ficus Benjamina, Weeping Fig', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficusbonsai">
     <img src="images/ficus_bonsai.jpg" alt="Ficus Bonsai">
     <h3>Ficus Bonsai</h3>
     <p>Miniature ornamental tree. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficusbonsai', 'Ficus Bonsai', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficusicelandbonsai">
     <img src="images/ficus_iceland_bonsai.jpg" alt="Ficus iceland Bonsai">
     <h3>Ficus iceland Bonsai</h3>
     <p>Unique bonsai variety. ₹549</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficusicelandbonsai', 'Ficus iceland Bonsai', 549)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficuspanda">
     <img src="images/ficus_panda.jpg" alt="Ficus Panda">
     <h3>Ficus Panda</h3>
     <p>Compact indoor plant. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficuspanda', 'Ficus Panda', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficuspandabonsai">
     <img src="images/ficus_panda_bonsai.jpg" alt="Ficus Panda Bonsai">
     <h3>Ficus Panda Bonsai</h3>
     <p>Miniature panda ficus. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficuspandabonsai', 'Ficus Panda Bonsai', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficuspumilavariegated">
     <img src="images/ficus_pumila_variegated.jpg" alt="Ficus pumila variegated">
     <h3>Ficus pumila, Creeping fig variegated (Hanging Basket)</h3>
     <p>Variegated trailing plant. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficuspumilavariegated', 'Ficus pumila, Creeping fig variegated (Hanging Basket)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="ficusreligiosa">
     <img src="images/ficus_religiosa.jpg" alt="Ficus religiosa">
     <h3>Ficus religiosa</h3>
     <p>Sacred peepal tree. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('ficusreligiosa', 'Ficus religiosa', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="fittoniared">
     <img src="images/fittonia_red.jpg" alt="Fittonia Albivenis Red">
     <h3>Fittonia Albivenis, Red Nerve Plant</h3>
     <p>Vivid red-veined foliage. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('fittoniared', 'Fittonia Albivenis, Red Nerve Plant', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="fittoniawhite">
     <img src="images/fittonia_white.jpg" alt="Fittonia Albivenis White">
     <h3>Fittonia Albivenis, White Nerve Plant</h3>
     <p>White-veined foliage. ₹249</p>
-  </div>
+    <button class="add-to cart" onclick="addToCart('fittoniawhite', 'Fittonia Albivenis, White Nerve Plant', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
-    <img src="images/palash.jpg" alt="Palash">
+<div class="product-card" data-id="palashchandigarh">
+    <img src="images/palash1.jpg" alt="Palash">
     <h3>Flower of Chandigarh, Palash</h3>
     <p>Vibrant state flower. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('palashchandigarh', 'Flower of Chandigarh, Palash', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
-    <img src="images/palash.jpg" alt="Palash">
+<div class="product-card" data-id="palashjharkhand">
+    <img src="images/palash2.jpg" alt="Palash">
     <h3>Flower of Jharkhand, Palash</h3>
     <p>Bright state flower. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('palashjharkhand', 'Flower of Jharkhand, Palash', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
-    <img src="images/palash.jpg" alt="Palash">
+<div class="product-card" data-id="palashmadhyapradesh">
+    <img src="images/palash3.jpg" alt="Palash">
     <h3>Flower of Madhya Pradesh, Palash</h3>
     <p>Iconic state flower. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('palashmadhyapradesh', 'Flower of Madhya Pradesh, Palash', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="dendrobiumorchidsikkim">
     <img src="images/dendrobium_orchid_any.jpg" alt="Flower of Sikkim">
     <h3>Flower of Sikkim, Dendrobium Orchid (Any Variety, Any Color)</h3>
     <p>State flower orchid. ₹499</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('dendrobiumorchidsikkim', 'Flower of Sikkim, Dendrobium Orchid (Any Variety, Any Color)', 499)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
-    <img src="images/palash.jpg" alt="Palash">
+<div class="product-card" data-id="palashuttarpradesh">
+    <img src="images/palash4.jpg" alt="Palash">
     <h3>Flower of Uttar Pradesh, Palash</h3>
     <p>State flower with cultural value. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('palashuttarpradesh', 'Flower of Uttar Pradesh, Palash', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="parijatwestbengal">
     <img src="images/parijat.jpg" alt="Flower of West Bengal">
     <h3>Flower of West Bengal, Parijatak, Harshringar</h3>
     <p>Fragrant night-blooming flower. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('parijatwestbengal', 'Flower of West Bengal, Parijatak, Harshringar', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="geraniumanycolor">
     <img src="images/geranium_anycolor.jpg" alt="Geranium Any Color">
     <h3>Geranium (Any Color)</h3>
     <p>Colorful garden plant. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('geraniumanycolor', 'Geranium (Any Color)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="geraniumorange">
     <img src="images/geranium_orange.jpg" alt="Geranium Orange">
     <h3>Geranium (Orange)</h3>
     <p>Bright orange blooms. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('geraniumorange', 'Geranium (Orange)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="geraniumpink">
     <img src="images/geranium_pink.jpg" alt="Geranium Pink">
     <h3>Geranium (Pink)</h3>
     <p>Soft pink flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('geraniumpink', 'Geranium (Pink)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="geraniumred">
     <img src="images/geranium_red.jpg" alt="Geranium Red">
     <h3>Geranium (Red)</h3>
     <p>Bold red blooms. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('geraniumred', 'Geranium (Red)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="geraniumwhite">
     <img src="images/geranium_white.jpg" alt="Geranium White">
     <h3>Geranium (White)</h3>
     <p>Pure white flowers. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('geraniumwhite', 'Geranium (White)', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberaanycolor">
     <img src="images/gerbera_anycolor.jpg" alt="Gerbera Any Color">
     <h3>Gerbera (Any Color)</h3>
     <p>Vivid daisy-like flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberaanycolor', 'Gerbera (Any Color)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberadarkpink">
     <img src="images/gerbera_darkpink.jpg" alt="Gerbera Dark Pink">
     <h3>Gerbera (Dark Pink)</h3>
     <p>Deep pink blooms. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberadarkpink', 'Gerbera (Dark Pink)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberaorange">
     <img src="images/gerbera_orange.jpg" alt="Gerbera Orange">
     <h3>Gerbera (Orange)</h3>
     <p>Bright orange flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberaorange', 'Gerbera (Orange)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberapink">
     <img src="images/gerbera_pink.jpg" alt="Gerbera Pink">
     <h3>Gerbera (Pink)</h3>
     <p>Soft pink daisies. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberapink', 'Gerbera (Pink)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberared">
     <img src="images/gerbera_red.jpg" alt="Gerbera Red">
     <h3>Gerbera (Red)</h3>
     <p>Bold red blooms. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberared', 'Gerbera (Red)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberawhite">
     <img src="images/gerbera_white.jpg" alt="Gerbera White">
     <h3>Gerbera (White)</h3>
     <p>Pure white flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberawhite', 'Gerbera (White)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gerberayellow">
     <img src="images/gerbera_yellow.jpg" alt="Gerbera Yellow">
     <h3>Gerbera (Yellow)</h3>
     <p>Sunny yellow blooms. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gerberayellow', 'Gerbera (Yellow)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniaanycolor">
     <img src="images/gloxinia_anycolor.jpg" alt="Gloxinia Any Color">
     <h3>Gloxinia (Any Color)</h3>
     <p>Vibrant indoor blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniaanycolor', 'Gloxinia (Any Color)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniapink">
     <img src="images/gloxinia_pink.jpg" alt="Gloxinia Pink">
     <h3>Gloxinia (Pink)</h3>
     <p>Soft pink flowers. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniapink', 'Gloxinia (Pink)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniapurplewhite">
     <img src="images/gloxinia_purplewhite.jpg" alt="Gloxinia Purple White">
     <h3>Gloxinia (Purple - White)</h3>
     <p>Bicolored purple and white blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniapurplewhite', 'Gloxinia (Purple - White)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniapurple">
     <img src="images/gloxinia_purple.jpg" alt="Gloxinia Purple">
     <h3>Gloxinia (Purple)</h3>
     <p>Rich purple flowers. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniapurple', 'Gloxinia (Purple)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniaredwhite">
     <img src="images/gloxinia_redwhite.jpg" alt="Gloxinia Red White">
     <h3>Gloxinia (Red - White)</h3>
     <p>Bicolored red and white blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniaredwhite', 'Gloxinia (Red - White)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="gloxiniared">
     <img src="images/gloxinia_red.jpg" alt="Gloxinia Red">
     <h3>Gloxinia (Red)</h3>
     <p>Bold red blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('gloxiniared', 'Gloxinia (Red)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="goldencypress">
     <img src="images/golden_cypress.jpg" alt="Golden Cypress">
     <h3>Golden Cypress</h3>
     <p>Ornamental golden conifer. ₹349</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('goldencypress', 'Golden Cypress', 349)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="grapeseedlessgrafted">
     <img src="images/grape_seedless_grafted.jpg" alt="Grape Seedless Grafted">
     <h3>Grape, Angoor (Grafted, Seedless)</h3>
     <p>High-yield seedless grapevine. ₹999</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('grapeseedlessgrafted', 'Grape, Angoor (Grafted, Seedless)', 999)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="grapeseedless">
     <img src="images/grape_seedless.jpg" alt="Grape Seedless">
     <h3>Grape, Angoor (Seedless)</h3>
     <p>Seedless fruit vine. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('grapeseedless', 'Grape, Angoor (Seedless)', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="guavagrafted">
     <img src="images/guava_grafted.jpg" alt="Guava Tree Grafted">
     <h3>Guava Tree, Amrud, Psidium guajava (Grafted)</h3>
     <p>High-quality fruit tree. ₹799</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('guavagrafted', 'Guava Tree, Amrud, Psidium guajava (Grafted)', 799)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="guavaseeds">
     <img src="images/guava_seeds.jpg" alt="Guava Tree Seeds">
     <h3>Guava Tree, Amrud, Psidium guajava (Grown through seeds)</h3>
     <p>Fruit tree from seeds. ₹599</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('guavaseeds', 'Guava Tree, Amrud, Psidium guajava (Grown through seeds)', 599)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="haworthia">
     <img src="images/haworthia.jpg" alt="Haworthia">
     <h3>Haworthia</h3>
     <p>Small succulent for decor. ₹199</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('haworthia', 'Haworthia', 199)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusanycolor">
     <img src="images/hibiscus_anycolor.jpg" alt="Hibiscus Any Color">
     <h3>Hibiscus, Gudhal Flower (Any Color)</h3>
     <p>Vivid flowering shrub. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusanycolor', 'Hibiscus, Gudhal Flower (Any Color)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscushybridanycolor">
     <img src="images/hibiscus_hybrid_anycolor.jpg" alt="Hibiscus Hybrid Any Color">
     <h3>Hibiscus, Gudhal Flower (Hybrid, Any Color)</h3>
     <p>Hybrid vibrant blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscushybridanycolor', 'Hibiscus, Gudhal Flower (Hybrid, Any Color)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusorange">
     <img src="images/hibiscus_orange.jpg" alt="Hibiscus Orange">
     <h3>Hibiscus, Gudhal Flower (Orange)</h3>
     <p>Bright orange flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusorange', 'Hibiscus, Gudhal Flower (Orange)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscuspeachdouble">
     <img src="images/hibiscus_peach_double.jpg" alt="Hibiscus Peach Double">
     <h3>Hibiscus, Gudhal Flower (Peach Double)</h3>
     <p>Double peach blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscuspeachdouble', 'Hibiscus, Gudhal Flower (Peach Double)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscuspink">
     <img src="images/hibiscus_pink.jpg" alt="Hibiscus Pink">
     <h3>Hibiscus, Gudhal Flower (Pink)</h3>
     <p>Soft pink flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscuspink', 'Hibiscus, Gudhal Flower (Pink)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscuspurple">
     <img src="images/hibiscus_purple.jpg" alt="Hibiscus Purple">
     <h3>Hibiscus, Gudhal Flower (Purple)</h3>
     <p>Rich purple blooms. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscuspurple', 'Hibiscus, Gudhal Flower (Purple)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusreddouble">
     <img src="images/hibiscus_red_double.jpg" alt="Hibiscus Red Double">
     <h3>Hibiscus, Gudhal Flower (Red Double)</h3>
     <p>Double red blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusreddouble', 'Hibiscus, Gudhal Flower (Red Double)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusred">
     <img src="images/hibiscus_red.jpg" alt="Hibiscus Red">
     <h3>Hibiscus, Gudhal Flower (Red)</h3>
     <p>Bold red flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusred', 'Hibiscus, Gudhal Flower (Red)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscuswhite">
     <img src="images/hibiscus_white.jpg" alt="Hibiscus White">
     <h3>Hibiscus, Gudhal Flower (White)</h3>
     <p>Pure white blooms. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscuswhite', 'Hibiscus, Gudhal Flower (White)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusyellowdouble">
     <img src="images/hibiscus_yellow_double.jpg" alt="Hibiscus Yellow Double">
     <h3>Hibiscus, Gudhal Flower (Yellow Double)</h3>
     <p>Double yellow blooms. ₹299</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusyellowdouble', 'Hibiscus, Gudhal Flower (Yellow Double)', 299)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusyellowred">
     <img src="images/hibiscus_yellow_red.jpg" alt="Hibiscus Yellow Red">
     <h3>Hibiscus, Gudhal Flower (Yellow Red)</h3>
     <p>Bicolored yellow and red flowers. ₹249</p>
-  </div>
+    <button class="add-to-cart" onclick="addToCart('hibiscusyellowred', 'Hibiscus, Gudhal Flower (Yellow Red)', 249)">Add to Cart</button>
+</div>
 
-  <div class="product-card">
+<div class="product-card" data-id="hibiscusyellow">
     <img src="images/hibiscus_yellow.jpg" alt="Hibiscus Yellow">
     <h3>Hibiscus, Gudhal Flower (Yellow)</h3>
     <p>Sunny yellow blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('hibiscusyellow', 'Hibiscus, Gudhal Flower (Yellow)', 249)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-id="hydrangeaarborescens">
+    <img src="images/hydrangea_arborescens.jpg" alt="Hydrangea Arborescens">
+    <h3>Hydrangea Arborescens, Smooth Hydrangea (White)</h3>
+    <p>Elegant white blooms for your garden. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('hydrangeaarborescens', 'Hydrangea Arborescens, Smooth Hydrangea (White)', 499)">Add to Cart</button>
   </div>
+
+  <div class="product-card" data-id="hydrangeamacrophyllaanycolor">
+    <img src="images/hydrangea_macrophylla_anycolor.jpg" alt="Hydrangea Macrophylla Any Color">
+    <h3>Hydrangea Macrophylla (Any Color)</h3>
+    <p>Vibrant blooms in assorted colors. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('hydrangeamacrophyllaanycolor', 'Hydrangea Macrophylla (Any Color)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="hydrangeamacrophyllablue">
+    <img src="images/hydrangea_macrophylla_blue.jpg" alt="Hydrangea Macrophylla Blue">
+    <h3>Hydrangea Macrophylla (Blue)</h3>
+    <p>Stunning blue flowers for elegance. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('hydrangeamacrophyllablue', 'Hydrangea Macrophylla (Blue)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="hydrangeamacrophyllapink">
+    <img src="images/hydrangea_macrophylla_pink.jpg" alt="Hydrangea Macrophylla Pink">
+    <h3>Hydrangea Macrophylla (Pink)</h3>
+    <p>Soft pink blooms for charm. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('hydrangeamacrophyllapink', 'Hydrangea Macrophylla (Pink)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoraanycolor">
+    <img src="images/ixora_anycolor.jpg" alt="Ixora Any Color">
+    <h3>Ixora (Any Color)</h3>
+    <p>Colorful blooms for tropical vibes. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoraanycolor', 'Ixora (Any Color)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixorapackof3">
+    <img src="images/ixora_packof3.jpg" alt="Ixora Pack of 3">
+    <h3>Ixora (Pack of 3)</h3>
+    <p>Three vibrant ixora plants. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('ixorapackof3', 'Ixora (Pack of 3)', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoradwarforange">
+    <img src="images/ixora_dwarf_orange.jpg" alt="Ixora Dwarf Orange">
+    <h3>Ixora Dwarf (Orange)</h3>
+    <p>Compact orange blooms for decor. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('ixoradwarforange', 'Ixora Dwarf (Orange)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoradwarfpeach">
+    <img src="images/ixora_dwarf_peach.jpg" alt="Ixora Dwarf Peach">
+    <h3>Ixora Dwarf (Peach)</h3>
+    <p>Delicate peach-colored flowers. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('ixoradwarfpeach', 'Ixora Dwarf (Peach)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoradwarfred">
+    <img src="images/ixora_dwarf_red.jpg" alt="Ixora Dwarf Red">
+    <h3>Ixora Dwarf (Red)</h3>
+    <p>Bold red blooms in compact size. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('ixoradwarfred', 'Ixora Dwarf (Red)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoradwarfyellow">
+    <img src="images/ixora_dwarf_yellow.jpg" alt="Ixora Dwarf Yellow">
+    <h3>Ixora Dwarf (Yellow)</h3>
+    <p>Sunny yellow flowers for vibrancy. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('ixoradwarfyellow', 'Ixora Dwarf (Yellow)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoralongwhite">
+    <img src="images/ixora_long_white.jpg" alt="Ixora Long White">
+    <h3>Ixora Long, Singapuri Ixora (White)</h3>
+    <p>Pure white blooms for elegance. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoralongwhite', 'Ixora Long, Singapuri Ixora (White)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoralongorange">
+    <img src="images/ixora_long_orange.jpg" alt="Ixora Long Orange">
+    <h3>Ixora Long, Singapuri Ixora (Orange)</h3>
+    <p>Bright orange flowers for vibrancy. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoralongorange', 'Ixora Long, Singapuri Ixora (Orange)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoralongpink">
+    <img src="images/ixora_long_pink.jpg" alt="Ixora Long Pink">
+    <h3>Ixora Long, Singapuri Ixora (Pink)</h3>
+    <p>Soft pink blooms for charm. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoralongpink', 'Ixora Long, Singapuri Ixora (Pink)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoralongred">
+    <img src="images/ixora_long_red.jpg" alt="Ixora Long Red">
+    <h3>Ixora Long, Singapuri Ixora (Red)</h3>
+    <p>Bold red flowers for impact. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoralongred', 'Ixora Long, Singapuri Ixora (Red)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoralongyellow">
+    <img src="images/ixora_long_yellow.jpg" alt="Ixora Long Yellow">
+    <h3>Ixora Long, Singapuri Ixora (Yellow)</h3>
+    <p>Sunny yellow blooms for brightness. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('ixoralongyellow', 'Ixora Long, Singapuri Ixora (Yellow)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoraminidwarfanycolor">
+    <img src="images/ixora_minidwarf_anycolor.jpg" alt="Ixora Mini Dwarf Any Color">
+    <h3>Ixora Mini Dwarf (Any Color)</h3>
+    <p>Compact blooms in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('ixoraminidwarfanycolor', 'Ixora Mini Dwarf (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoraminidwarfpink">
+    <img src="images/ixora_minidwarf_pink.jpg" alt="Ixora Mini Dwarf Pink">
+    <h3>Ixora Mini Dwarf (Pink)</h3>
+    <p>Delicate pink flowers in mini size. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('ixoraminidwarfpink', 'Ixora Mini Dwarf (Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ixoraminidwarfwhite">
+    <img src="images/ixora_minidwarf_white.jpg" alt="Ixora Mini Dwarf White">
+    <h3>Ixora Mini Dwarf (White)</h3>
+    <p>Pure white blooms in compact form. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('ixoraminidwarfwhite', 'Ixora Mini Dwarf (White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jackfruitseeds">
+    <img src="images/jackfruit_seeds.jpg" alt="Jack Fruit Grown Through Seeds">
+    <h3>Jack Fruit, Kathal, Artocarpus Heterophyllus (Grown through Seeds)</h3>
+    <p>Tropical fruit tree from seeds. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('jackfruitseeds', 'Jack Fruit, Kathal, Artocarpus Heterophyllus (Grown through Seeds)', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jackfruitgrafted">
+    <img src="images/jackfruit_grafted.jpg" alt="Jack Fruit Grafted">
+    <h3>Jack Fruit, Kathal, Artocarpus Heterophyllus (Grafted)</h3>
+    <p>High-yield grafted fruit tree. ₹899</p>
+    <button class="add-to-cart" onclick="addToCart('jackfruitgrafted', 'Jack Fruit, Kathal, Artocarpus Heterophyllus (Grafted)', 899)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jackfruituttarashadha">
+    <img src="images/jackfruit_uttarashadha.jpg" alt="Jack Fruit Uttarashadha Nakshatra">
+    <h3>Jack Fruit, Tree of Uttarashadha Nakshatra, Sagittarius or Dhanu Rashi</h3>
+    <p>Culturally significant fruit tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('jackfruituttarashadha', 'Jack Fruit, Tree of Uttarashadha Nakshatra, Sagittarius or Dhanu Rashi', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jaiplant">
+    <img src="images/jai_plant.jpg" alt="Jai Plant">
+    <h3>Jai - Plant</h3>
+    <p>Ornamental plant for decor. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('jaiplant', 'Jai - Plant', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jamuntree">
+    <img src="images/jamun_tree.jpg" alt="Jamun Tree">
+    <h3>Jamun Tree, Syzygium cumini</h3>
+    <p>Fruit tree with health benefits. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('jamuntree', 'Jamun Tree, Syzygium cumini', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jamunrohini">
+    <img src="images/jamun_rohini.jpg" alt="Jamun Rohini Nakshatra">
+    <h3>Jamun, Tree for Rohini Nakshatra, Taurus or Vrishabha Rashi</h3>
+    <p>Culturally significant fruit tree. ₹749</p>
+    <button class="add-to-cart" onclick="addToCart('jamunrohini', 'Jamun, Tree for Rohini Nakshatra, Taurus or Vrishabha Rashi', 749)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jasminumgrandiflorum">
+    <img src="images/jasminum_grandiflorum.jpg" alt="Jasminum grandiflorum">
+    <h3>Jasminum grandiflorum</h3>
+    <p>Fragrant jasmine for gardens. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('jasminumgrandiflorum', 'Jasminum grandiflorum', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="jasminumsambac">
+    <img src="images/jasminum_sambac.jpg" alt="Jasminum sambac">
+    <h3>Jasminum sambac, Mogra, Arabian Jasmine</h3>
+    <p>Fragrant blooms for decor. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('jasminumsambac', 'Jasminum sambac, Mogra, Arabian Jasmine', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="juhijasminum">
+    <img src="images/juhi_jasminum.jpg" alt="Juhi Jasminum">
+    <h3>Juhi, Jasminum Auriculatum</h3>
+    <p>Delicate jasmine with sweet scent. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('juhijasminum', 'Juhi, Jasminum Auriculatum', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="junipererecta">
+    <img src="images/juniper_erecta.jpg" alt="Juniper Erecta">
+    <h3>Juniper, Juniperous Erecta</h3>
+    <p>Ornamental conifer for landscaping. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('junipererecta', 'Juniper, Juniperous Erecta', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kadamtree">
+    <img src="images/kadam_tree.jpg" alt="Kadam Tree">
+    <h3>Kadam Tree, Kadamb</h3>
+    <p>Fragrant flowering tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('kadamtree', 'Kadam Tree, Kadamb', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kadambasatabisha">
+    <img src="images/kadamba_satabisha.jpg" alt="Kadamba Satabisha Nakshatra">
+    <h3>Kadamba, Tree of Satabisha Nakshatra, Aquarius or Kumbha Rashi</h3>
+    <p>Culturally significant tree. ₹649</p>
+    <button class="add-to-cart" onclick="addToCart('kadambasatabisha', 'Kadamba, Tree of Satabisha Nakshatra, Aquarius or Kumbha Rashi', 649)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kagzinimboo">
+    <img src="images/kagzi_nimboo.jpg" alt="Kagzi Nimboo">
+    <h3>Kagzi Nimboo, Lemon Tree</h3>
+    <p>Fruit tree for fresh lemons. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('kagzinimboo', 'Kagzi Nimboo, Lemon Tree', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kajutree">
+    <img src="images/kaju_tree.jpg" alt="Kaju Tree">
+    <h3>Kaju Tree</h3>
+    <p>Cashew nut producing tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('kajutree', 'Kaju Tree', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoeanycolor">
+    <img src="images/kalanchoe_anycolor.jpg" alt="Kalanchoe Any Color">
+    <h3>Kalanchoe (Any Color)</h3>
+    <p>Vibrant succulent blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoeanycolor', 'Kalanchoe (Any Color)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoelightpink">
+    <img src="images/kalanchoe_lightpink.jpg" alt="Kalanchoe Light Pink">
+    <h3>Kalanchoe (Light Pink)</h3>
+    <p>Soft light pink flowers. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoelightpink', 'Kalanchoe (Light Pink)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoeorange">
+    <img src="images/kalanchoe_orange.jpg" alt="Kalanchoe Orange">
+    <h3>Kalanchoe (Orange)</h3>
+    <p>Bright orange blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoeorange', 'Kalanchoe (Orange)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoepink">
+    <img src="images/kalanchoe_pink.jpg" alt="Kalanchoe Pink">
+    <h3>Kalanchoe (Pink)</h3>
+    <p>Delicate pink flowers. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoepink', 'Kalanchoe (Pink)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoered">
+    <img src="images/kalanchoe_red.jpg" alt="Kalanchoe Red">
+    <h3>Kalanchoe (Red)</h3>
+    <p>Bold red blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoered', 'Kalanchoe (Red)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoewhite">
+    <img src="images/kalanchoe_white.jpg" alt="Kalanchoe White">
+    <h3>Kalanchoe (White)</h3>
+    <p>Pure white flowers. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoewhite', 'Kalanchoe (White)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kalanchoeyellow">
+    <img src="images/kalanchoe_yellow.jpg" alt="Kalanchoe Yellow">
+    <h3>Kalanchoe (Yellow)</h3>
+    <p>Sunny yellow blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('kalanchoeyellow', 'Kalanchoe (Yellow)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kaminiplant">
+    <img src="images/kamini_plant.jpg" alt="Kamini Plant">
+    <h3>Kamini</h3>
+    <p>Fragrant flowering shrub. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('kaminiplant', 'Kamini', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kamrakstarfruit">
+    <img src="images/kamrak_starfruit.jpg" alt="Kamrak Star Fruit">
+    <h3>Kamrak, Star Fruit</h3>
+    <p>Exotic fruit tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('kamrakstarfruit', 'Kamrak, Star Fruit', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kaneranycolor">
+    <img src="images/kaner_anycolor.jpg" alt="Kaner Any Color">
+    <h3>Kaner, Nerium Oleander (Any Color)</h3>
+    <p>Vibrant blooms for gardens. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('kaneranycolor', 'Kaner, Nerium Oleander (Any Color)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kapoortulsi">
+    <img src="images/kapoor_tulsi.jpg" alt="Kapoor Tulsi">
+    <h3>Kapoor Tulsi Plant, Blue Basil, Ocimum kilimandscharicum (Green)</h3>
+    <p>Medicinal and aromatic herb. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('kapoortulsi', 'Kapoor Tulsi Plant, Blue Basil, Ocimum kilimandscharicum (Green)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="khirniplant">
+    <img src="images/khirni_plant.jpg" alt="Khirni Plant">
+    <h3>Khirni</h3>
+    <p>Fruit tree with sweet berries. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('khirniplant', 'Khirni', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="kiwiplant">
+    <img src="images/kiwi_plant.jpg" alt="Kiwi Plant">
+    <h3>Kiwi</h3>
+    <p>Fruit vine for fresh kiwis. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('kiwiplant', 'Kiwi', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lantanacamaraanycolor">
+    <img src="images/lantana_camara_anycolor.jpg" alt="Lantana Camara Any Color">
+    <h3>Lantana Camara (Any Color)</h3>
+    <p>Colorful blooms for gardens. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('lantanacamaraanycolor', 'Lantana Camara (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lantanacamaralavender">
+    <img src="images/lantana_camara_lavender.jpg" alt="Lantana Camara Lavender">
+    <h3>Lantana Camara (Lavender)</h3>
+    <p>Soft lavender flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('lantanacamaralavender', 'Lantana Camara (Lavender)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lantanacamararedhaldikumkum">
+    <img src="images/lantana_camara_red_haldi_kumkum.jpg" alt="Lantana Camara Red Haldi Kumkum">
+    <h3>Lantana Camara (Red, Haldi Kumkum)</h3>
+    <p>Bold red blooms with cultural vibe. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('lantanacamararedhaldikumkum', 'Lantana Camara (Red, Haldi Kumkum)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lantanacamarawhite">
+    <img src="images/lantana_camara_white.jpg" alt="Lantana Camara White">
+    <h3>Lantana Camara (White)</h3>
+    <p>Pure white flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('lantanacamarawhite', 'Lantana Camara (White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lantanacamarayellow">
+    <img src="images/lantana_camara_yellow.jpg" alt="Lantana Camara Yellow">
+    <h3>Lantana Camara (Yellow)</h3>
+    <p>Sunny yellow blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('lantanacamarayellow', 'Lantana Camara (Yellow)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="lemongrass">
+    <img src="images/lemon_grass.jpg" alt="Lemon Grass">
+    <h3>Lemon Grass</h3>
+    <p>Aromatic herb for culinary use. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('lemongrass', 'Lemon Grass', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="madhumaltidwarf">
+    <img src="images/madhumalti_dwarf.jpg" alt="Madhumalti Dwarf">
+    <h3>Madhumalti Dwarf, Rangoon Creeper</h3>
+    <p>Fragrant flowering vine. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('madhumaltidwarf', 'Madhumalti Dwarf, Rangoon Creeper', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mahuarevati">
+    <img src="images/mahua_revati.jpg" alt="Mahua Revati Nakshatra">
+    <h3>Mahua, Tree of Revati Nakshatra, Pisces or Meen Rashi</h3>
+    <p>Culturally significant tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('mahuarevati', 'Mahua, Tree of Revati Nakshatra, Pisces or Meen Rashi', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangopackof5">
+    <img src="images/mango_packof5.jpg" alt="Mango Pack of 5">
+    <h3>Mango (Pack of 5)</h3>
+    <p>Five grafted mango varieties. ₹3999</p>
+    <button class="add-to-cart" onclick="addToCart('mangopackof5', 'Mango (Pack of 5)', 3999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangohimsagar">
+    <img src="images/mango_himsagar.jpg" alt="Mango Himsagar">
+    <h3>Mango Himsagar, Aam Himsagar</h3>
+    <p>Sweet and juicy mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangohimsagar', 'Mango Himsagar, Aam Himsagar', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangoalphonso">
+    <img src="images/mango_alphonso.jpg" alt="Mango Alphonso">
+    <h3>Mango Tree (Alphonso, Grafted)</h3>
+    <p>Premium grafted mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangoalphonso', 'Mango Tree (Alphonso, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangoamrapali">
+    <img src="images/mango_amrapali.jpg" alt="Mango Amrapali">
+    <h3>Mango Tree (Amrapali, Grafted)</h3>
+    <p>High-yield grafted mango. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangoamrapali', 'Mango Tree (Amrapali, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangobadami">
+    <img src="images/mango_badami.jpg" alt="Mango Badami">
+    <h3>Mango Tree (Badami, Grafted)</h3>
+    <p>Delicious grafted mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangobadami', 'Mango Tree (Badami, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangodudhpedo">
+    <img src="images/mango_dudhpedo.jpg" alt="Mango Dudh Pedo">
+    <h3>Mango Tree (Dudh Pedo, Grafted)</h3>
+    <p>Unique grafted mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangodudhpedo', 'Mango Tree (Dudh Pedo, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangoseeds">
+    <img src="images/mango_seeds.jpg" alt="Mango Grown Through Seeds">
+    <h3>Mango Tree (Grown through Seeds)</h3>
+    <p>Mango tree from seeds. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('mangoseeds', 'Mango Tree (Grown through Seeds)', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangokesar">
+    <img src="images/mango_kesar.jpg" alt="Mango Kesar">
+    <h3>Mango Tree (Kesar, Grafted)</h3>
+    <p>Saffron-flavored grafted mango. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangokesar', 'Mango Tree (Kesar, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangomallika">
+    <img src="images/mango_mallika.jpg" alt="Mango Mallika">
+    <h3>Mango Tree (Mallika, Grafted)</h3>
+    <p>Sweet grafted mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangomallika', 'Mango Tree (Mallika, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangopairi">
+    <img src="images/mango_pairi.jpg" alt="Mango Pairi">
+    <h3>Mango Tree (Pairi, Grafted)</h3>
+    <p>Tangy grafted mango variety. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangopairi', 'Mango Tree (Pairi, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangosindhu">
+    <img src="images/mango_sindhu.jpg" alt="Mango Sindhu">
+    <h3>Mango Tree (Sindhu, Grafted, Seedless)</h3>
+    <p>Seedless grafted mango. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangosindhu', 'Mango Tree (Sindhu, Grafted, Seedless)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangototapuri">
+    <img src="images/mango_totapuri.jpg" alt="Mango Totapuri">
+    <h3>Mango Tree (Totapuri, Grafted)</h3>
+    <p>Tangy grafted mango for juicing. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangototapuri', 'Mango Tree (Totapuri, Grafted)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mangopoorvabhadrapada">
+    <img src="images/mango_poorvabhadrapada.jpg" alt="Mango Poorvabhadrapada Nakshatra">
+    <h3>Mango, Tree of Poorvabhadrapada Nakshatra, Aquarius or Kumbha Rashi</h3>
+    <p>Culturally significant mango tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('mangopoorvabhadrapada', 'Mango, Tree of Poorvabhadrapada Nakshatra, Aquarius or Kumbha Rashi', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="micheliachampawhite">
+    <img src="images/michelia_champa_white.jpg" alt="Michelia Champa White">
+    <h3>Michelia Champa Son Champa (White)</h3>
+    <p>Fragrant white blooms. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('micheliachampawhite', 'Michelia Champa Son Champa (White)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="micheliachampaorangegrafted">
+    <img src="images/michelia_champa_orange_grafted.jpg" alt="Michelia Champa Orange Grafted">
+    <h3>Michelia Champa, Son Champa (Orange, Grafted)</h3>
+    <p>Grafted orange champa blooms. ₹549</p>
+    <button class="add-to-cart" onclick="addToCart('micheliachampaorangegrafted', 'Michelia Champa, Son Champa (Orange, Grafted)', 549)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="micheliachampaorangeseeds">
+    <img src="images/michelia_champa_orange_seeds.jpg" alt="Michelia Champa Orange Seeds">
+    <h3>Michelia Champa, Son Champa (Orange, Grown Through Seed)</h3>
+    <p>Orange champa from seeds. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('micheliachampaorangeseeds', 'Michelia Champa, Son Champa (Orange, Grown Through Seed)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniatureroseanycolor">
+    <img src="images/miniature_rose_anycolor.jpg" alt="Miniature Rose Any Color">
+    <h3>Miniature Rose, Button Rose (Any Color)</h3>
+    <p>Compact roses in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniatureroseanycolor', 'Miniature Rose, Button Rose (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniaturerosemaroon">
+    <img src="images/miniature_rose_maroon.jpg" alt="Miniature Rose Maroon">
+    <h3>Miniature Rose, Button Rose (Maroon)</h3>
+    <p>Deep maroon mini roses. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniaturerosemaroon', 'Miniature Rose, Button Rose (Maroon)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniaturerosepink">
+    <img src="images/miniature_rose_pink.jpg" alt="Miniature Rose Pink">
+    <h3>Miniature Rose, Button Rose (Pink)</h3>
+    <p>Soft pink mini roses. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniaturerosepink', 'Miniature Rose, Button Rose (Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniaturerosered">
+    <img src="images/miniature_rose_red.jpg" alt="Miniature Rose Red">
+    <h3>Miniature Rose, Button Rose (Red)</h3>
+    <p>Bold red mini roses. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniaturerosered', 'Miniature Rose, Button Rose (Red)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniaturerosewhite">
+    <img src="images/miniature_rose_white.jpg" alt="Miniature Rose White">
+    <h3>Miniature Rose, Button Rose (White)</h3>
+    <p>Pure white mini roses. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniaturerosewhite', 'Miniature Rose, Button Rose (White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="miniatureroseyellow">
+    <img src="images/miniature_rose_yellow.jpg" alt="Miniature Rose Yellow">
+    <h3>Miniature Rose, Button Rose (Yellow)</h3>
+    <p>Sunny yellow mini roses. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('miniatureroseyellow', 'Miniature Rose, Button Rose (Yellow)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantgolden">
+    <img src="images/money_plant_golden.jpg" alt="Money Plant Golden">
+    <h3>Money Plant Golden, Scindapsus Golden</h3>
+    <p>Golden foliage for prosperity. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantgolden', 'Money Plant Golden, Scindapsus Golden', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantgoldenhanging">
+    <img src="images/money_plant_golden_hanging.jpg" alt="Money Plant Golden Hanging">
+    <h3>Money Plant Golden, Scindapsus Golden (Hanging Basket)</h3>
+    <p>Golden trailing plant for decor. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantgoldenhanging', 'Money Plant Golden, Scindapsus Golden (Hanging Basket)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantmarbleprince">
+    <img src="images/money_plant_marble_prince.jpg" alt="Money Plant Marble Prince">
+    <h3>Money Plant Marble Prince, Scindapsus N Joy</h3>
+    <p>Variegated foliage for elegance. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantmarbleprince', 'Money Plant Marble Prince, Scindapsus N Joy', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantmarbleprincehanging">
+    <img src="images/money_plant_marble_prince_hanging.jpg" alt="Money Plant Marble Prince Hanging">
+    <h3>Money Plant Marble Prince, Scindapsus N Joy (Hanging Basket)</h3>
+    <p>Variegated trailing plant. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantmarbleprincehanging', 'Money Plant Marble Prince, Scindapsus N Joy (Hanging Basket)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantmarblequeen">
+    <img src="images/money_plant_marble_queen.jpg" alt="Money Plant Marble Queen">
+    <h3>Money Plant Marble Queen</h3>
+    <p>Creamy variegated leaves. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantmarblequeen', 'Money Plant Marble Queen', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantmarblequeenhanging">
+    <img src="images/money_plant_marble_queen_hanging.jpg" alt="Money Plant Marble Queen Hanging">
+    <h3>Money Plant Marble Queen (Hanging Basket)</h3>
+    <p>Trailing variegated plant. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantmarblequeenhanging', 'Money Plant Marble Queen (Hanging Basket)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantpackof3">
+    <img src="images/money_plant_packof3.jpg" alt="Money Plant Pack of 3">
+    <h3>Money Plant, Scindapsus (Pack of 3)</h3>
+    <p>Three money plants for prosperity. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantpackof3', 'Money Plant, Scindapsus (Pack of 3)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantgreen">
+    <img src="images/money_plant_green.jpg" alt="Money Plant Green">
+    <h3>Money Plant, Scindapsus (Green)</h3>
+    <p>Lush green foliage for positivity. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantgreen', 'Money Plant, Scindapsus (Green)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="moneyplantgreenhanging">
+    <img src="images/money_plant_green_hanging.jpg" alt="Money Plant Green Hanging">
+    <h3>Money Plant, Scindapsus Green (Hanging Basket)</h3>
+    <p>Trailing green plant for decor. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('moneyplantgreenhanging', 'Money Plant, Scindapsus Green (Hanging Basket)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="monkshood">
+    <img src="images/monks_hood.jpg" alt="Monks Hood">
+    <h3>Monks Hood</h3>
+    <p>Unique flowering plant. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('monkshood', 'Monks Hood', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="monsteradeliciosa">
+    <img src="images/monstera_deliciosa.jpg" alt="Monstera Deliciosa">
+    <h3>Monstera Deliciosa</h3>
+    <p>Iconic split-leaf indoor plant. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('monsteradeliciosa', 'Monstera Deliciosa', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mosambi">
+    <img src="images/mosambi.jpg" alt="Mosambi">
+    <h3>Mosambi, Sweet Lime (Grafted)</h3>
+    <p>Juicy grafted citrus tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('mosambi', 'Mosambi, Sweet Lime (Grafted)', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="mothersbloom">
+    <img src="images/mothers_bloom.jpg" alt="Mothers Bloom">
+    <h3>Mothers Bloom - Air Plant</h3>
+    <p>Unique air plant for decor. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('mothersbloom', 'Mothers Bloom - Air Plant', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nariyalgolden">
+    <img src="images/nariyal_golden.jpg" alt="Nariyal Golden">
+    <h3>Nariyal, Coconut Tree (Golden, Hybrid)</h3>
+    <p>Hybrid coconut tree for tropics. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('nariyalgolden', 'Nariyal, Coconut Tree (Golden, Hybrid)', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nariyalgreen">
+    <img src="images/nariyal_green.jpg" alt="Nariyal Green">
+    <h3>Nariyal, Coconut Tree (Green, Grown Through Seeds)</h3>
+    <p>Traditional coconut tree from seeds. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('nariyalgreen', 'Nariyal, Coconut Tree (Green, Grown Through Seeds)', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nasatabletop">
+    <img src="images/nasa_tabletop.jpg" alt="NASA Table Top Plants">
+    <h3>NASA Recommended Table Top / Office Desk Plants</h3>
+    <p>Air-purifying plants for desks. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('nasatabletop', 'NASA Recommended Table Top / Office Desk Plants', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nasatop5indoor">
+    <img src="images/nasa_top5_indoor.jpg" alt="NASA Top 5 Indoor Plants">
+    <h3>NASA Top 5 Indoor Plants for Oxygen</h3>
+    <p>Best plants for indoor oxygen. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('nasatop5indoor', 'NASA Top 5 Indoor Plants for Oxygen', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="naturalairpurifiersummer">
+    <img src="images/natural_air_purifier_summer.jpg" alt="Natural Air Purifier Plants">
+    <h3>Natural Air Purifier Plants for Summer Cooling</h3>
+    <p>Cool your space naturally. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('naturalairpurifiersummer', 'Natural Air Purifier Plants for Summer Cooling', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="neemtree">
+    <img src="images/neem_tree.jpg" alt="Neem Tree">
+    <h3>Neem Tree, Azadirachta indica</h3>
+    <p>Medicinal and pest-repellent tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('neemtree', 'Neem Tree, Azadirachta indica', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="neemuttarabhadrapada">
+    <img src="images/neem_uttarabhadrapada.jpg" alt="Neem Uttarabhadrapada Nakshatra">
+    <h3>Neem, Tree of Uttarabhadrapada Nakshatra, Pisces or Meen Rashi</h3>
+    <p>Culturally significant neem tree. ₹649</p>
+    <button class="add-to-cart" onclick="addToCart('neemuttarabhadrapada', 'Neem, Tree of Uttarabhadrapada Nakshatra, Pisces or Meen Rashi', 649)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nimboolemontree">
+    <img src="images/nimboo_lemon_tree.jpg" alt="Nimboo Lemon Tree">
+    <h3>Nimboo, Lemon Tree</h3>
+    <p>Classic lemon tree for fresh fruit. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('nimboolemontree', 'Nimboo, Lemon Tree', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nimboobigfruit">
+    <img src="images/nimboo_bigfruit.jpg" alt="Nimboo Big Fruit">
+    <h3>Nimboo, Lemon Tree (Big Fruit, Grafted)</h3>
+    <p>Grafted lemon tree for large fruits. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('nimboobigfruit', 'Nimboo, Lemon Tree (Big Fruit, Grafted)', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="nimbooseedless">
+    <img src="images/nimboo_seedless.jpg" alt="Nimboo Seedless">
+    <h3>Nimboo, Lemon Tree (Seedless)</h3>
+    <p>Seedless lemon tree for juicing. ₹549</p>
+    <button class="add-to-cart" onclick="addToCart('nimbooseedless', 'Nimboo, Lemon Tree (Seedless)', 549)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orangefruitsantra">
+    <img src="images/orange_fruit_santra.jpg" alt="Orange Fruit Santra">
+    <h3>Orange Fruit, Santra</h3>
+    <p>Juicy orange tree for fresh fruit. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('orangefruitsantra', 'Orange Fruit, Santra', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orchiddendrobiumany">
+    <img src="images/orchid_dendrobium_any.jpg" alt="Dendrobium Orchid Any">
+    <h3>Orchid Plant, Dendrobium Orchid (Any Variety, Any Color)</h3>
+    <p>Elegant orchid in assorted colors. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('orchiddendrobiumany', 'Orchid Plant, Dendrobium Orchid (Any Variety, Any Color)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orchiddendrobiumlavender">
+    <img src="images/orchid_dendrobium_lavender.jpg" alt="Dendrobium Orchid Lavender">
+    <h3>Orchid Plant, Dendrobium Orchid (Any Variety, Lavender)</h3>
+    <p>Lavender-colored orchid blooms. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('orchiddendrobiumlavender', 'Orchid Plant, Dendrobium Orchid (Any Variety, Lavender)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orchiddendrobiumwhite">
+    <img src="images/orchid_dendrobium_white.jpg" alt="Dendrobium Orchid White">
+    <h3>Orchid Plant, Dendrobium Orchid (Any Variety, White)</h3>
+    <p>Pure white orchid flowers. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('orchiddendrobiumwhite', 'Orchid Plant, Dendrobium Orchid (Any Variety, White)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orchiddendrobiumwine">
+    <img src="images/orchid_dendrobium_wine.jpg" alt="Dendrobium Orchid Wine">
+    <h3>Orchid Plant, Dendrobium Orchid (Any Variety, Wine Color)</h3>
+    <p>Rich wine-colored orchid blooms. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('orchiddendrobiumwine', 'Orchid Plant, Dendrobium Orchid (Any Variety, Wine Color)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="orchiddendrobiumyellow">
+    <img src="images/orchid_dendrobium_yellow.jpg" alt="Dendrobium Orchid Yellow">
+    <h3>Orchid Plant, Dendrobium Orchid (Any Variety, Yellow)</h3>
+    <p>Sunny yellow orchid flowers. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('orchiddendrobiumyellow', 'Orchid Plant, Dendrobium Orchid (Any Variety, Yellow)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="dendrobiumpackof2">
+    <img src="images/dendrobium_packof2.jpg" alt="Dendrobium Orchid Pack of 2">
+    <h3>Pack of 2 Dendrobium Orchid Plants</h3>
+    <p>Two elegant dendrobium orchids. ₹899</p>
+    <button class="add-to-cart" onclick="addToCart('dendrobiumpackof2', 'Pack of 2 Dendrobium Orchid Plants', 899)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="phalaenopsispackof2">
+    <img src="images/phalaenopsis_packof2.jpg" alt="Phalaenopsis Orchid Pack of 2">
+    <h3>Pack of 2 Pretty Phalaenopsis Orchid Plants</h3>
+    <p>Two beautiful phalaenopsis orchids. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('phalaenopsispackof2', 'Pack of 2 Pretty Phalaenopsis Orchid Plants', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="palashbutea">
+    <img src="images/palash_butea.jpg" alt="Palash Butea">
+    <h3>Palash, Butea</h3>
+    <p>Vibrant flowering tree. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('palashbutea', 'Palash, Butea', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="palashpoorvaphalguni">
+    <img src="images/palash_poorvaphalguni.jpg" alt="Palash Poorvaphalguni Nakshatra">
+    <h3>Palash, Tree of Poorvaphalguni Nakshatra, Leo or Singh Rashi</h3>
+    <p>Culturally significant tree. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('palashpoorvaphalguni', 'Palash, Tree of Poorvaphalguni Nakshatra, Leo or Singh Rashi', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="yellowcanepalm">
+    <img src="images/yellow_cane_palm.jpg" alt="Yellow Cane Palm">
+    <h3>Palm: Yellow Cane Palm</h3>
+    <p>Tropical palm for indoor decor. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('yellowcanepalm', 'Palm: Yellow Cane Palm', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="parijattree">
+    <img src="images/parijat_tree.jpg" alt="Parijat Tree">
+    <h3>Parijat Tree, Parijatak, Night Flowering Jasmine</h3>
+    <p>Fragrant night-blooming jasmine. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('parijattree', 'Parijat Tree, Parijatak, Night Flowering Jasmine', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="peacelilyspathiphyllum">
+    <img src="images/peace_lily_spathiphyllum.jpg" alt="Peace Lily Spathiphyllum">
+    <h3>Peace Lily, Spathiphyllum</h3>
+    <p>Air-purifying indoor plant. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('peacelilyspathiphyllum', 'Peace Lily, Spathiphyllum', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="peacelilygolden">
+    <img src="images/peace_lily_golden.jpg" alt="Peace Lily Golden">
+    <h3>Peace Lily, Spathiphyllum (Golden)</h3>
+    <p>Golden variegated peace lily. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('peacelilygolden', 'Peace Lily, Spathiphyllum (Golden)', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="peacockplant">
+    <img src="images/peacock_plant.jpg" alt="Peacock Plant">
+    <h3>Peacock Plant, Calathea Makoyana</h3>
+    <p>Decorative foliage plant. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('peacockplant', 'Peacock Plant, Calathea Makoyana', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="peperlongum">
+    <img src="images/peper_longum.jpg" alt="Peeper Longum">
+    <h3>Peeper Longum</h3>
+    <p>Medicinal herb for health. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('peperlongum', 'Peeper Longum', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pencilpinecypress">
+    <img src="images/pencil_pine_cypress.jpg" alt="Pencil Pine Cypress">
+    <h3>Pencil Pine Cypress, Cupressus Sempervirens</h3>
+    <p>Slender conifer for landscaping. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('pencilpinecypress', 'Pencil Pine Cypress, Cupressus Sempervirens', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pentasanycolor">
+    <img src="images/pentas_anycolor.jpg" alt="Pentas Any Color">
+    <h3>Pentas (Any Color)</h3>
+    <p>Star-shaped blooms in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('pentasanycolor', 'Pentas (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pentasdarkpink">
+    <img src="images/pentas_darkpink.jpg" alt="Pentas Dark Pink">
+    <h3>Pentas (Dark Pink)</h3>
+    <p>Deep pink star-shaped flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('pentasdarkpink', 'Pentas (Dark Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pentaspink">
+    <img src="images/pentas_pink.jpg" alt="Pentas Pink">
+    <h3>Pentas (Pink)</h3>
+    <p>Soft pink star-shaped blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('pentaspink', 'Pentas (Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pentaswhite">
+    <img src="images/pentas_white.jpg" alt="Pentas White">
+    <h3>Pentas (White)</h3>
+    <p>Pure white star-shaped flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('pentaswhite', 'Pentas (White)', 199)">Add to Cart</button>
+  </div>
+
+<div class="product-card" data-id="petuniaanycolor">
+    <img src="images/petunia_anycolor.jpg" alt="Petunia Any Color">
+    <h3>Petunia (Any Color)</h3>
+    <p>Vibrant blooms in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniaanycolor', 'Petunia (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniababypink">
+    <img src="images/petunia_babypink.jpg" alt="Petunia Baby Pink">
+    <h3>Petunia (Baby Pink)</h3>
+    <p>Soft baby pink flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniababypink', 'Petunia (Baby Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniahalfpinkhalfwhite">
+    <img src="images/petunia_halfpinkhalfwhite.jpg" alt="Petunia Half Pink Half White">
+    <h3>Petunia (Half Pink Half White)</h3>
+    <p>Unique half pink, half white blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniahalfpinkhalfwhite', 'Petunia (Half Pink Half White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniapinkwhitestrip">
+    <img src="images/petunia_pinkwhitestrip.jpg" alt="Petunia Pink with White Strip">
+    <h3>Petunia (Pink with White Strip)</h3>
+    <p>Pink blooms with white stripes. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniapinkwhitestrip', 'Petunia (Pink with White Strip)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniapink">
+    <img src="images/petunia_pink.jpg" alt="Petunia Pink">
+    <h3>Petunia (Pink)</h3>
+    <p>Bright pink flowers for vibrancy. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniapink', 'Petunia (Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniared">
+    <img src="images/petunia_red.jpg" alt="Petunia Red">
+    <h3>Petunia (Red)</h3>
+    <p>Bold red blooms for impact. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniared', 'Petunia (Red)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniavioletwhitestrip">
+    <img src="images/petunia_violetwhitestrip.jpg" alt="Petunia Violet with White Strip">
+    <h3>Petunia (Violet with White Strip)</h3>
+    <p>Violet blooms with white stripes. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniavioletwhitestrip', 'Petunia (Violet with White Strip)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniaviolet">
+    <img src="images/petunia_violet.jpg" alt="Petunia Violet">
+    <h3>Petunia (Violet)</h3>
+    <p>Rich violet flowers for elegance. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniaviolet', 'Petunia (Violet)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="petuniawhite">
+    <img src="images/petunia_white.jpg" alt="Petunia White">
+    <h3>Petunia (White)</h3>
+    <p>Pure white blooms for purity. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('petuniawhite', 'Petunia (White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="phalaenopsispink">
+    <img src="images/phalaenopsis_pink.jpg" alt="Phalaenopsis Orchid Pink">
+    <h3>Phalaenopsis Orchid (Any Variety, Pink)</h3>
+    <p>Elegant pink orchid blooms. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('phalaenopsispink', 'Phalaenopsis Orchid (Any Variety, Pink)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="phalaenopsiswhite">
+    <img src="images/phalaenopsis_white.jpg" alt="Phalaenopsis Orchid White">
+    <h3>Phalaenopsis Orchid (Any Variety, White)</h3>
+    <p>Pure white orchid flowers. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('phalaenopsiswhite', 'Phalaenopsis Orchid (Any Variety, White)', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="phalaenopsismatureanycolor">
+    <img src="images/phalaenopsis_mature_anycolor.jpg" alt="Phalaenopsis Orchid Mature Any Color">
+    <h3>Phalaenopsis Orchid (Mature Blooming Size, Any Color)</h3>
+    <p>Mature orchid in assorted colors. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('phalaenopsismatureanycolor', 'Phalaenopsis Orchid (Mature Blooming Size, Any Color)', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="phalaenopsisyellow">
+    <img src="images/phalaenopsis_yellow.jpg" alt="Phalaenopsis Orchid Yellow">
+    <h3>Phalaenopsis Orchid, Yellow</h3>
+    <p>Sunny yellow orchid blooms. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('phalaenopsisyellow', 'Phalaenopsis Orchid, Yellow', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="philodendronbrokenheart">
+    <img src="images/philodendron_brokenheart.jpg" alt="Philodendron Broken Heart">
+    <h3>Philodendron Broken Heart, Monstera Adansonii</h3>
+    <p>Unique heart-shaped leaves. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('philodendronbrokenheart', 'Philodendron Broken Heart, Monstera Adansonii', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pinetree">
+    <img src="images/pine_tree.jpg" alt="Pine Tree">
+    <h3>Pine Tree</h3>
+    <p>Evergreen for landscaping. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('pinetree', 'Pine Tree', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pineapple">
+    <img src="images/pineapple.jpg" alt="Pineapple">
+    <h3>Pineapple, Anannas</h3>
+    <p>Tropical fruit plant. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('pineapple', 'Pineapple, Anannas', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pipalpushya">
+    <img src="images/pipal_pushya.jpg" alt="Pipal Pushya Nakshatra">
+    <h3>Pipal, Tree of Pushya Nakshatra, Cancer or Kark Rashi</h3>
+    <p>Culturally significant tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('pipalpushya', 'Pipal, Tree of Pushya Nakshatra, Cancer or Kark Rashi', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="piperbetel">
+    <img src="images/piper_betel.jpg" alt="Piper Betel">
+    <h3>Piper Betel, Maghai Paan</h3>
+    <p>Traditional betel leaf plant. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('piperbetel', 'Piper Betel, Maghai Paan', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriarubrahybrid">
+    <img src="images/plumeria_rubra_hybrid.jpg" alt="Plumeria Rubra Hybrid">
+    <h3>Plumeria Rubra Hybrid, Champa</h3>
+    <p>Fragrant hybrid champa blooms. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriarubrahybrid', 'Plumeria Rubra Hybrid, Champa', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriaanycolor">
+    <img src="images/plumeria_anycolor.jpg" alt="Plumeria Any Color">
+    <h3>Plumeria, Champa (Any Color)</h3>
+    <p>Assorted colors of champa blooms. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriaanycolor', 'Plumeria, Champa (Any Color)', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriapink">
+    <img src="images/plumeria_pink.jpg" alt="Plumeria Pink">
+    <h3>Plumeria, Champa (Pink)</h3>
+    <p>Soft pink champa flowers. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriapink', 'Plumeria, Champa (Pink)', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriawhite">
+    <img src="images/plumeria_white.jpg" alt="Plumeria White">
+    <h3>Plumeria, Champa (White)</h3>
+    <p>Pure white champa blooms. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriawhite', 'Plumeria, Champa (White)', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriayellow">
+    <img src="images/plumeria_yellow.jpg" alt="Plumeria Yellow">
+    <h3>Plumeria, Champa (Yellow)</h3>
+    <p>Sunny yellow champa flowers. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriayellow', 'Plumeria, Champa (Yellow)', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="plumeriasingaporedwarf">
+    <img src="images/plumeria_singapore_dwarf.jpg" alt="Plumeria Singapore Dwarf">
+    <h3>Plumeria, Champa, Singapore Dwarf (White Pink)</h3>
+    <p>Compact white-pink champa. ₹449</p>
+    <button class="add-to-cart" onclick="addToCart('plumeriasingaporedwarf', 'Plumeria, Champa, Singapore Dwarf (White Pink)', 449)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiayellow">
+    <img src="images/poinsettia_yellow.jpg" alt="Poinsettia Yellow">
+    <h3>Poinsettia (Yellow)</h3>
+    <p>Festive yellow bracts. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiayellow', 'Poinsettia (Yellow)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiapackof3">
+    <img src="images/poinsettia_packof3.jpg" alt="Poinsettia Pack of 3">
+    <h3>Poinsettia, Christmas Flower (Pack of 3)</h3>
+    <p>Three festive poinsettias. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiapackof3', 'Poinsettia, Christmas Flower (Pack of 3)', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiaanycolor">
+    <img src="images/poinsettia_anycolor.jpg" alt="Poinsettia Any Color">
+    <h3>Poinsettia, Christmas Flower (Any Color)</h3>
+    <p>Festive bracts in assorted colors. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiaanycolor', 'Poinsettia, Christmas Flower (Any Color)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiapink">
+    <img src="images/poinsettia_pink.jpg" alt="Poinsettia Pink">
+    <h3>Poinsettia, Christmas Flower (Pink)</h3>
+    <p>Soft pink festive bracts. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiapink', 'Poinsettia, Christmas Flower (Pink)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiared">
+    <img src="images/poinsettia_red.jpg" alt="Poinsettia Red">
+    <h3>Poinsettia, Christmas Flower (Red)</h3>
+    <p>Classic red festive bracts. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiared', 'Poinsettia, Christmas Flower (Red)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="poinsettiawhite">
+    <img src="images/poinsettia_white.jpg" alt="Poinsettia White">
+    <h3>Poinsettia, Christmas Flower (White)</h3>
+    <p>Pure white festive bracts. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('poinsettiawhite', 'Poinsettia, Christmas Flower (White)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ponytailpalm">
+    <img src="images/pony_tail_palm.jpg" alt="Pony Tail Palm">
+    <h3>Pony Tail Palm, Beaucarnea Recurvata</h3>
+    <p>Unique indoor palm with swollen base. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('ponytailpalm', 'Pony Tail Palm, Beaucarnea Recurvata', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="popularoutdoorplants">
+    <img src="images/popular_outdoor_plants.jpg" alt="Popular Outdoor Plants">
+    <h3>Popular Outdoor Plants for Gardening on Terrace</h3>
+    <p>Best plants for terrace gardens. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('popularoutdoorplants', 'Popular Outdoor Plants for Gardening on Terrace', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulacagardenpack">
+    <img src="images/portulaca_garden_pack.jpg" alt="Portulaca Garden Pack">
+    <h3>Portulaca Garden Pack (4 Plants + 4 Black Pots)</h3>
+    <p>Four portulaca plants with pots. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('portulacagardenpack', 'Portulaca Garden Pack (4 Plants + 4 Black Pots)', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulacaquadrifida">
+    <img src="images/portulaca_quadrifida.jpg" alt="Portulaca Quadrifida">
+    <h3>Portulaca Quadrifida</h3>
+    <p>Small vibrant succulent blooms. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulacaquadrifida', 'Portulaca Quadrifida', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca10oclockpink">
+    <img src="images/portulaca_10oclock_pink.jpg" alt="Portulaca 10 O Clock Pink">
+    <h3>Portulaca, 10 O Clock (Pink)</h3>
+    <p>Pink blooms for sunny spots. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca10oclockpink', 'Portulaca, 10 O Clock (Pink)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca10oclocksunrise">
+    <img src="images/portulaca_10oclock_sunrise.jpg" alt="Portulaca 10 O Clock Sunrise">
+    <h3>Portulaca, 10 O Clock (Sunrise)</h3>
+    <p>Sunrise-colored blooms for vibrancy. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca10oclocksunrise', 'Portulaca, 10 O Clock (Sunrise)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca10oclockwhite">
+    <img src="images/portulaca_10oclock_white.jpg" alt="Portulaca 10 O Clock White">
+    <h3>Portulaca, 10 O Clock (White)</h3>
+    <p>Pure white blooms for elegance. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca10oclockwhite', 'Portulaca, 10 O Clock (White)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca10oclockyellow">
+    <img src="images/portulaca_10oclock_yellow.jpg" alt="Portulaca 10 O Clock Yellow">
+    <h3>Portulaca, 10 O Clock (Yellow)</h3>
+    <p>Sunny yellow blooms for brightness. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca10oclockyellow', 'Portulaca, 10 O Clock (Yellow)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockhanginganycolor">
+    <img src="images/portulaca_9oclock_hanging_anycolor.jpg" alt="Portulaca 9 O Clock Hanging Any Color">
+    <h3>Portulaca, 9 O Clock (Any Color, Hanging Basket)</h3>
+    <p>Trailing blooms in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockhanginganycolor', 'Portulaca, 9 O Clock (Any Color, Hanging Basket)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockanycolor">
+    <img src="images/portulaca_9oclock_anycolor.jpg" alt="Portulaca 9 O Clock Any Color">
+    <h3>Portulaca, 9 O Clock (Any Color)</h3>
+    <p>Assorted colors for sunny gardens. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockanycolor', 'Portulaca, 9 O Clock (Any Color)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockorange">
+    <img src="images/portulaca_9oclock_orange.jpg" alt="Portulaca 9 O Clock Orange">
+    <h3>Portulaca, 9 O Clock (Orange)</h3>
+    <p>Bright orange blooms for vibrancy. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockorange', 'Portulaca, 9 O Clock (Orange)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockpeach">
+    <img src="images/portulaca_9oclock_peach.jpg" alt="Portulaca 9 O Clock Peach">
+    <h3>Portulaca, 9 O Clock (Peach)</h3>
+    <p>Soft peach-colored flowers. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockpeach', 'Portulaca, 9 O Clock (Peach)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockpinkwhite">
+    <img src="images/portulaca_9oclock_pinkwhite.jpg" alt="Portulaca 9 O Clock Pink White">
+    <h3>Portulaca, 9 O Clock (Pink, White)</h3>
+    <p>Pink and white mixed blooms. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockpinkwhite', 'Portulaca, 9 O Clock (Pink, White)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockpink">
+    <img src="images/portulaca_9oclock_pink.jpg" alt="Portulaca 9 O Clock Pink">
+    <h3>Portulaca, 9 O Clock (Pink)</h3>
+    <p>Pink blooms for sunny spots. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockpink', 'Portulaca, 9 O Clock (Pink)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockred">
+    <img src="images/portulaca_9oclock_red.jpg" alt="Portulaca 9 O Clock Red">
+    <h3>Portulaca, 9 O Clock (Red)</h3>
+    <p>Bold red blooms for impact. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockred', 'Portulaca, 9 O Clock (Red)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockwhite">
+    <img src="images/portulaca_9oclock_white.jpg" alt="Portulaca 9 O Clock White">
+    <h3>Portulaca, 9 O Clock (White)</h3>
+    <p>Pure white blooms for elegance. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockwhite', 'Portulaca, 9 O Clock (White)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca9oclockyellow">
+    <img src="images/portulaca_9oclock_yellow.jpg" alt="Portulaca 9 O Clock Yellow">
+    <h3>Portulaca, 9 O Clock (Yellow)</h3>
+    <p>Sunny yellow blooms for brightness. ₹149</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca9oclockyellow', 'Portulaca, 9 O Clock (Yellow)', 149)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="portulaca10oclockhanginganycolor">
+    <img src="images/portulaca_10oclock_hanging_anycolor.jpg" alt="Portulaca 10 O Clock Hanging Any Color">
+    <h3>Portulaca, 10 O Clock (Any Color, Hanging Basket)</h3>
+    <p>Trailing blooms in assorted colors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('portulaca10oclockhanginganycolor', 'Portulaca, 10 O Clock (Any Color, Hanging Basket)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="pseuderanthemumlaxiflorum">
+    <img src="images/pseuderanthemum_laxiflorum.jpg" alt="Pseuderanthemum Laxiflorum">
+    <h3>Pseuderanthemum Laxiflorum, Kodia (Purple)</h3>
+    <p>Purple blooms for garden beauty. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('pseuderanthemumlaxiflorum', 'Pseuderanthemum Laxiflorum, Kodia (Purple)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="raatkirani">
+    <img src="images/raatkirani.jpg" alt="Raat Ki Rani">
+    <h3>Raat Ki Rani, Raat Rani, Night Blooming Jasmine</h3>
+    <p>Fragrant night-blooming jasmine. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('raatkirani', 'Raat Ki Rani, Raat Rani, Night Blooming Jasmine', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rajnigandha">
+    <img src="images/rajnigandha.jpg" alt="Rajnigandha">
+    <h3>Rajnigandha, Tuberose</h3>
+    <p>Fragrant white flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('rajnigandha', 'Rajnigandha, Tuberose', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rajnigandhadouble">
+    <img src="images/rajnigandha_double.jpg" alt="Rajnigandha Double">
+    <h3>Rajnigandha, Tuberose (Double)</h3>
+    <p>Double-layered fragrant blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rajnigandhadouble', 'Rajnigandha, Tuberose (Double)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ramatulsi">
+    <img src="images/rama_tulsi.jpg" alt="Rama Tulsi">
+    <h3>Rama Tulsi Plant, Holy Basil, Ocimum sanctum (Green)</h3>
+    <p>Medicinal and sacred herb. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('ramatulsi', 'Rama Tulsi Plant, Holy Basil, Ocimum sanctum (Green)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rambutantree">
+    <img src="images/rambutan_tree.jpg" alt="Rambutan Tree">
+    <h3>Rambutan Tree</h3>
+    <p>Exotic fruit tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('rambutantree', 'Rambutan Tree', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ramphalgrafted">
+    <img src="images/ramphal_grafted.jpg" alt="Ramphal Grafted">
+    <h3>Ramphal, Annona reticulata (Grafted)</h3>
+    <p>Grafted custard apple tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('ramphalgrafted', 'Ramphal, Annona reticulata (Grafted)', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ramphalseeds">
+    <img src="images/ramphal_seeds.jpg" alt="Ramphal Grown Through Seeds">
+    <h3>Ramphal, Annona reticulata (Grown Through Seeds)</h3>
+    <p>Custard apple tree from seeds. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('ramphalseeds', 'Ramphal, Annona reticulata (Grown Through Seeds)', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="ranunculussceleratus">
+    <img src="images/ranunculus_sceleratus.jpg" alt="Ranunculus Sceleratus">
+    <h3>Ranunculus Sceleratus</h3>
+    <p>Small yellow wildflowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('ranunculussceleratus', 'Ranunculus Sceleratus', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rauvolfiaserpentina">
+    <img src="images/rauvolfia_serpentina.jpg" alt="Rauvolfia Serpentina">
+    <h3>Rauvolfia Serpentina, Sarpgandha</h3>
+    <p>Medicinal plant for health. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('rauvolfiaserpentina', 'Rauvolfia Serpentina, Sarpgandha', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="redguava">
+    <img src="images/red_guava.jpg" alt="Red Guava">
+    <h3>Red Guava, Amrud, Psidium guajava</h3>
+    <p>Sweet red guava tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('redguava', 'Red Guava, Amrud, Psidium guajava', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="redlatanpalm">
+    <img src="images/red_latan_palm.jpg" alt="Red Latan Palm">
+    <h3>Red Latan Palm, Latania Lontaroides</h3>
+    <p>Ornamental palm with red hues. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('redlatanpalm', 'Red Latan Palm, Latania Lontaroides', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="redneckpalm">
+    <img src="images/red_neck_palm.jpg" alt="Red Neck Palm">
+    <h3>Red Neck Palm</h3>
+    <p>Unique palm with red stem. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('redneckpalm', 'Red Neck Palm', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="redsandalwood">
+    <img src="images/red_sandalwood.jpg" alt="Red Sandalwood Tree">
+    <h3>Red Sandalwood Tree, Chandan Tree</h3>
+    <p>Aromatic red sandalwood tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('redsandalwood', 'Red Sandalwood Tree, Chandan Tree', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="roseanycolor">
+    <img src="images/rose_anycolor.jpg" alt="Rose Any Color">
+    <h3>Rose (Any Color)</h3>
+    <p>Classic roses in assorted colors. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('roseanycolor', 'Rose (Any Color)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="roselightyellow">
+    <img src="images/rose_lightyellow.jpg" alt="Rose Light Yellow">
+    <h3>Rose (Light Yellow)</h3>
+    <p>Soft light yellow roses. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('roselightyellow', 'Rose (Light Yellow)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosemaroon">
+    <img src="images/rose_maroon.jpg" alt="Rose Maroon">
+    <h3>Rose (Maroon)</h3>
+    <p>Deep maroon roses for elegance. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosemaroon', 'Rose (Maroon)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="roseorange">
+    <img src="images/rose_orange.jpg" alt="Rose Orange">
+    <h3>Rose (Orange)</h3>
+    <p>Bright orange roses for vibrancy. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('roseorange', 'Rose (Orange)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosepeach">
+    <img src="images/rose_peach.jpg" alt="Rose Peach">
+    <h3>Rose (Peach)</h3>
+    <p>Soft peach-colored roses. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosepeach', 'Rose (Peach)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosepinkwhite">
+    <img src="images/rose_pinkwhite.jpg" alt="Rose Pink White">
+    <h3>Rose (Pink White)</h3>
+    <p>Pink and white mixed roses. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosepinkwhite', 'Rose (Pink White)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosepinkyellow">
+    <img src="images/rose_pinkyellow.jpg" alt="Rose Pink Yellow">
+    <h3>Rose (Pink Yellow)</h3>
+    <p>Pink and yellow mixed roses. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosepinkyellow', 'Rose (Pink Yellow)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosepink">
+    <img src="images/rose_pink.jpg" alt="Rose Pink">
+    <h3>Rose (Pink)</h3>
+    <p>Soft pink roses for charm. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosepink', 'Rose (Pink)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosered">
+    <img src="images/rose_red.jpg" alt="Rose Red">
+    <h3>Rose (Red)</h3>
+    <p>Classic red roses for love. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosered', 'Rose (Red)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosewhitepink">
+    <img src="images/rose_whitepink.jpg" alt="Rose White Pink">
+    <h3>Rose (White Pink)</h3>
+    <p>White and pink mixed roses. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosewhitepink', 'Rose (White Pink)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosewhite">
+    <img src="images/rose_white.jpg" alt="Rose White">
+    <h3>Rose (White)</h3>
+    <p>Pure white roses for purity. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('rosewhite', 'Rose (White)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="roseyellow">
+    <img src="images/rose_yellow.jpg" alt="Rose Yellow">
+    <h3>Rose (Yellow)</h3>
+    <p>Sunny yellow roses for joy. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('roseyellow', 'Rose (Yellow)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rosemary">
+    <img src="images/rosemary.jpg" alt="Rosemary">
+    <h3>Rosemary</h3>
+    <p>Aromatic herb for culinary use. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('rosemary', 'Rosemary', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="royalpal">
+    <img src="images/royal_palm.jpg" alt="Royal Palm">
+    <h3>Royal Palm, Roystonea regia</h3>
+    <p>Majestic palm for landscaping. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('royalpal', 'Royal Palm, Roystonea regia', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rubberplant">
+    <img src="images/rubber_plant.jpg" alt="Rubber Plant">
+    <h3>Rubber Tree, Rubber Plant, Ficus elastica</h3>
+    <p>Glossy indoor plant for decor. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('rubberplant', 'Rubber Tree, Rubber Plant, Ficus elastica', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rubberplantsmall">
+    <img src="images/rubber_plant_small.jpg" alt="Rubber Plant Small">
+    <h3>Rubber Tree, Rubber Plant, Ficus elastica (Small)</h3>
+    <p>Compact rubber plant for desks. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('rubberplantsmall', 'Rubber Tree, Rubber Plant, Ficus elastica (Small)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="rudrakshuttaraphalguni">
+    <img src="images/rudraksh_uttaraphalguni.jpg" alt="Rudraksh Uttaraphalguni Nakshatra">
+    <h3>Rudraksh, Tree of Uttaraphalguni Nakshatra, Leo or Singh Rashi</h3>
+    <p>Sacred tree with cultural value. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('rudrakshuttaraphalguni', 'Rudraksh, Tree of Uttaraphalguni Nakshatra, Leo or Singh Rashi', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="salmoola">
+    <img src="images/sal_moola.jpg" alt="Sal Moola Nakshatra">
+    <h3>Sal, Tree of Moola Nakshatra, Sagittarius or Dhanu Rashi</h3>
+    <p>Culturally significant tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('salmoola', 'Sal, Tree of Moola Nakshatra, Sagittarius or Dhanu Rashi', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="sandalwoodredardra">
+    <img src="images/sandalwood_red_ardra.jpg" alt="Sandalwood Red Ardra Nakshatra">
+    <h3>Sandal Wood Red, Tree of Ardra Nakshatra, Gemini or Mithun Rashi</h3>
+    <p>Aromatic red sandalwood tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('sandalwoodredardra', 'Sandal Wood Red, Tree of Ardra Nakshatra, Gemini or Mithun Rashi', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="snakeplanthahnii">
+    <img src="images/snake_plant_hahnii.jpg" alt="Snake Plant Hahnii">
+    <h3>Sansevieria trifasciata Hahnii, Snake Plant</h3>
+    <p>Compact air-purifying snake plant. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('snakeplanthahnii', 'Sansevieria trifasciata Hahnii, Snake Plant', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="snakeplantlaurentii">
+    <img src="images/snake_plant_laurentii.jpg" alt="Snake Plant Laurentii">
+    <h3>Sansevieria trifasciata, Snake Plant (var. laurentii)</h3>
+    <p>Variegated air-purifying plant. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('snakeplantlaurentii', 'Sansevieria trifasciata, Snake Plant (var. laurentii)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shahtoot">
+    <img src="images/shahtoot.jpg" alt="Shahtoot">
+    <h3>Shahtoot, Mulberry, Tuti</h3>
+    <p>Fruit tree with sweet berries. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('shahtoot', 'Shahtoot, Mulberry, Tuti', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shamidhanishta">
+    <img src="images/shami_dhanishta.jpg" alt="Shami Dhanishta Nakshatra">
+    <h3>Shami, Tree of Dhanishta Nakshatra, Capricorn or Makar Rashi</h3>
+    <p>Culturally significant tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('shamidhanishta', 'Shami, Tree of Dhanishta Nakshatra, Capricorn or Makar Rashi', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="sheesham">
+    <img src="images/sheesham.jpg" alt="Sheesham">
+    <h3>Sheesham, Sheesham Tree, Indian Rosewood Tree</h3>
+    <p>Durable timber tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('sheesham', 'Sheesham, Sheesham Tree, Indian Rosewood Tree', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantianycolor">
+    <img src="images/shevanti_anycolor.jpg" alt="Shevanti Any Color">
+    <h3>Shevanti, Chrysanthemum (Any Color)</h3>
+    <p>Assorted chrysanthemum blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantianycolor', 'Shevanti, Chrysanthemum (Any Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiorange">
+    <img src="images/shevanti_orange.jpg" alt="Shevanti Orange">
+    <h3>Shevanti, Chrysanthemum (Orange)</h3>
+    <p>Bright orange chrysanthemums. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiorange', 'Shevanti, Chrysanthemum (Orange)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantipink">
+    <img src="images/shevanti_pink.jpg" alt="Shevanti Pink">
+    <h3>Shevanti, Chrysanthemum (Pink)</h3>
+    <p>Soft pink chrysanthemum blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantipink', 'Shevanti, Chrysanthemum (Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantired">
+    <img src="images/shevanti_red.jpg" alt="Shevanti Red">
+    <h3>Shevanti, Chrysanthemum (Red)</h3>
+    <p>Bold red chrysanthemum flowers. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantired', 'Shevanti, Chrysanthemum (Red)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantisunflowerwhite">
+    <img src="images/shevanti_sunflowerwhite.jpg" alt="Shevanti Sunflower White">
+    <h3>Shevanti, Chrysanthemum (Sunflower White)</h3>
+    <p>Sunflower-like white blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantisunflowerwhite', 'Shevanti, Chrysanthemum (Sunflower White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiwhitepink">
+    <img src="images/shevanti_whitepink.jpg" alt="Shevanti White Pink">
+    <h3>Shevanti, Chrysanthemum (White, Pink)</h3>
+    <p>White and pink mixed blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiwhitepink', 'Shevanti, Chrysanthemum (White, Pink)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiwhite">
+    <img src="images/shevanti_white.jpg" alt="Shevanti White">
+    <h3>Shevanti, Chrysanthemum (White)</h3>
+    <p>Pure white chrysanthemum blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiwhite', 'Shevanti, Chrysanthemum (White)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiwine">
+    <img src="images/shevanti_wine.jpg" alt="Shevanti Wine Color">
+    <h3>Shevanti, Chrysanthemum (Wine Color)</h3>
+    <p>Rich wine-colored blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiwine', 'Shevanti, Chrysanthemum (Wine Color)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiyellowred">
+    <img src="images/shevanti_yellowred.jpg" alt="Shevanti Yellow Red">
+    <h3>Shevanti, Chrysanthemum (Yellow, Red)</h3>
+    <p>Yellow and red mixed blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiyellowred', 'Shevanti, Chrysanthemum (Yellow, Red)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="shevantiyellow">
+    <img src="images/shevanti_yellow.jpg" alt="Shevanti Yellow">
+    <h3>Shevanti, Chrysanthemum (Yellow)</h3>
+    <p>Sunny yellow chrysanthemum blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('shevantiyellow', 'Shevanti, Chrysanthemum (Yellow)', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="silvercypress">
+    <img src="images/silver_cypress.jpg" alt="Silver Cypress">
+    <h3>Silver Cypress</h3>
+    <p>Silvery foliage for landscaping. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('silvercypress', 'Silver Cypress', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="sitaphalgrafted">
+    <img src="images/sitaphal_grafted.jpg" alt="Sitaphal Grafted">
+    <h3>Sitaphal, Annona squamosa (Grafted)</h3>
+    <p>Grafted sugar apple tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('sitaphalgrafted', 'Sitaphal, Annona squamosa (Grafted)', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="sitaphalseeds">
+    <img src="images/sitaphal_seeds.jpg" alt="Sitaphal Grown Through Seeds">
+    <h3>Sitaphal, Annona squamosa (Grown Through Seeds)</h3>
+    <p>Sugar apple tree from seeds. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('sitaphalseeds', 'Sitaphal, Annona squamosa (Grown Through Seeds)', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="skyblueclustervine">
+    <img src="images/skyblue_clustervine.jpg" alt="Skyblue Clustervine">
+    <h3>Skyblue Clustervine</h3>
+    <p>Delicate sky-blue flowering vine. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('skyblueclustervine', 'Skyblue Clustervine', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="slipperyelm">
+    <img src="images/slippery_elm.jpg" alt="Slippery Elm">
+    <h3>Slippery Elm</h3>
+    <p>Medicinal tree with health benefits. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('slipperyelm', 'Slippery Elm', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="srilankantagarwhite">
+    <img src="images/srilankan_tagar_white.jpg" alt="Srilankan Tagar White">
+    <h3>Srilankan Tagar (White)</h3>
+    <p>Fragrant white tagar blooms. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('srilankantagarwhite', 'Srilankan Tagar (White)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="stargooseberry">
+    <img src="images/star_gooseberry.jpg" alt="Star Gooseberry">
+    <h3>Star Gooseberry, Harfarauri</h3>
+    <p>Tart fruit tree for culinary use. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('stargooseberry', 'Star Gooseberry, Harfarauri', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="starfishsucculent">
+    <img src="images/starfish_succulent.jpg" alt="Starfish Succulent">
+    <h3>Starfish, Stapelia variegata - Succulent Plant</h3>
+    <p>Unique star-shaped succulent. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('starfishsucculent', 'Starfish, Stapelia variegata - Succulent Plant', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="steviaplant">
+    <img src="images/stevia_plant.jpg" alt="Stevia Plant">
+    <h3>Stevia Plant, Stevia rebaudiana</h3>
+    <p>Natural sweetener plant. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('steviaplant', 'Stevia Plant, Stevia rebaudiana', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="strawberry">
+    <img src="images/strawberry.jpg" alt="Strawberry">
+    <h3>Strawberry</h3>
+    <p>Sweet berry plant for pots. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('strawberry', 'Strawberry', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="syngoniumpink">
+    <img src="images/syngonium_pink.jpg" alt="Syngonium Pink">
+    <h3>Syngonium (Pink)</h3>
+    <p>Pink foliage for indoor decor. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('syngoniumpink', 'Syngonium (Pink)', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="syngoniumgreen">
+    <img src="images/syngonium_green.jpg" alt="Syngonium Green">
+    <h3>Syngonium Green</h3>
+    <p>Lush green foliage for indoors. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('syngoniumgreen', 'Syngonium Green', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="syngoniumvariegated">
+    <img src="images/syngonium_variegated.jpg" alt="Syngonium Variegated">
+    <h3>Syngonium Variegated</h3>
+    <p>Variegated leaves for elegance. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('syngoniumvariegated', 'Syngonium Variegated', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tablepalm">
+    <img src="images/table_palm.jpg" alt="Table Palm">
+    <h3>Table Palm, Umbrella Palm</h3>
+    <p>Compact palm for desks. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('tablepalm', 'Table Palm, Umbrella Palm', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tabletoptoxinremoval">
+    <img src="images/tabletop_toxin_removal.jpg" alt="Table Top Toxin Removal Plants">
+    <h3>Table Top / Office Desk Plants For Removing Indoor Toxins</h3>
+    <p>Plants for cleaner indoor air. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('tabletoptoxinremoval', 'Table Top / Office Desk Plants For Removing Indoor Toxins', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tagardouble">
+    <img src="images/tagar_double.jpg" alt="Tagar Double">
+    <h3>Tagar Double</h3>
+    <p>Double-layered fragrant blooms. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('tagardouble', 'Tagar Double', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tagarmini">
+    <img src="images/tagar_mini.jpg" alt="Tagar Mini">
+    <h3>Tagar Mini</h3>
+    <p>Compact fragrant tagar blooms. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('tagarmini', 'Tagar Mini', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="teakwood">
+    <img src="images/teakwood.jpg" alt="Teakwood">
+    <h3>Teakwood, Sagwan</h3>
+    <p>Premium timber tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('teakwood', 'Teakwood, Sagwan', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tecomashrubanycolor">
+    <img src="images/tecoma_shrub_anycolor.jpg" alt="Tecoma Shrub Any Color">
+    <h3>Tecoma (Shrub, Any Color)</h3>
+    <p>Assorted colors of tecoma blooms. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('tecomashrubanycolor', 'Tecoma (Shrub, Any Color)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tecomashruborange">
+    <img src="images/tecoma_shrub_orange.jpg" alt="Tecoma Shrub Orange">
+    <h3>Tecoma (Shrub, Orange)</h3>
+    <p>Bright orange tecoma flowers. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('tecomashruborange', 'Tecoma (Shrub, Orange)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tecomashrubpink">
+    <img src="images/tecoma_shrub_pink.jpg" alt="Tecoma Shrub Pink">
+    <h3>Tecoma (Shrub, Pink)</h3>
+    <p>Soft pink tecoma blooms. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('tecomashrubpink', 'Tecoma (Shrub, Pink)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="tecomashrubred">
+    <img src="images/tecoma_shrub_red.jpg" alt="Tecoma Shrub Red">
+    <h3>Tecoma (Shrub, Red)</h3>
+    <p>Bold red tecoma flowers. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('tecomashrubred', 'Tecoma (Shrub, Red)', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="thaimonasterybamboo">
+    <img src="images/thai_monastery_bamboo.jpg" alt="Thai Monastery Bamboo">
+    <h3>Thai Monastery Bamboo</h3>
+    <p>Ornamental bamboo for gardens. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('thaimonasterybamboo', 'Thai Monastery Bamboo', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top2airpurifier">
+    <img src="images/top2_airpurifier.jpg" alt="Top 2 Air Purifier Plants">
+    <h3>Top 2 Air Purifier Plants for Indoor</h3>
+    <p>Best plants for cleaner air. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('top2airpurifier', 'Top 2 Air Purifier Plants for Indoor', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top2anthurium">
+    <img src="images/top2_anthurium.jpg" alt="Top 2 Anthurium Plants">
+    <h3>Top 2 Beautiful Anthurium Plant of the Season</h3>
+    <p>Stunning anthurium varieties. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('top2anthurium', 'Top 2 Beautiful Anthurium Plant of the Season', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top2cleanair">
+    <img src="images/top2_cleanair.jpg" alt="Top 2 Plants for Clean Air">
+    <h3>Top 2 Plants for Clean Indoor Air</h3>
+    <p>Effective air-purifying plants. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('top2cleanair', 'Top 2 Plants for Clean Indoor Air', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3airpurifierpack">
+    <img src="images/top3_airpurifier_pack.jpg" alt="Top 3 Air Purifier Plants Pack">
+    <h3>Top 3 Air Purifier Plants Pack</h3>
+    <p>Three plants for cleaner air. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('top3airpurifierpack', 'Top 3 Air Purifier Plants Pack', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3aromatic">
+    <img src="images/top3_aromatic.jpg" alt="Top 3 Aromatic Plants">
+    <h3>Top 3 Aromatic Plants</h3>
+    <p>Fragrant plants for your space. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('top3aromatic', 'Top 3 Aromatic Plants', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3kalanchoe">
+    <img src="images/top3_kalanchoe.jpg" alt="Top 3 Kalanchoe Flowers">
+    <h3>Top 3 Beautiful Kalanchoe Flowers of the Season</h3>
+    <p>Stunning kalanchoe varieties. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('top3kalanchoe', 'Top 3 Beautiful Kalanchoe Flowers of the Season', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3crotonpack">
+    <img src="images/top3_croton_pack.jpg" alt="Top 3 Croton Plants Pack">
+    <h3>Top 3 Croton Plants Pack</h3>
+    <p>Colorful croton varieties. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('top3crotonpack', 'Top 3 Croton Plants Pack', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3floweringgarden">
+    <img src="images/top3_flowering_garden.jpg" alt="Top 3 Flowering Plants">
+    <h3>Top 3 Flowering Plants to Enhance Garden Beauty</h3>
+    <p>Beautify your garden with blooms. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('top3floweringgarden', 'Top 3 Flowering Plants to Enhance Garden Beauty', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3fruitpots">
+    <img src="images/top3_fruit_pots.jpg" alt="Top 3 Fruit Plants for Pots">
+    <h3>Top 3 Fruit Plants to Grow in Pots</h3>
+    <p>Fruit plants for container gardening. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top3fruitpots', 'Top 3 Fruit Plants to Grow in Pots', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3hangingbasket">
+    <img src="images/top3_hanging_basket.jpg" alt="Top 3 Hanging Basket Plants">
+    <h3>Top 3 Hanging Basket Plants</h3>
+    <p>Trailing plants for hanging baskets. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('top3hangingbasket', 'Top 3 Hanging Basket Plants', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3airpurifierbedroom">
+    <img src="images/top3_airpurifier_bedroom.jpg" alt="Top 3 Air Purifier Plants for Bedroom">
+    <h3>Top 3 Marvelous Air Purifier Plants for Bedroom</h3>
+    <p>Air-purifying plants for better sleep. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('top3airpurifierbedroom', 'Top 3 Marvelous Air Purifier Plants for Bedroom', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3medicinalherbs">
+    <img src="images/top3_medicinal_herbs.jpg" alt="Top 3 Medicinal Herbs">
+    <h3>Top 3 Medicinal Herbs</h3>
+    <p>Herbs for health and wellness. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('top3medicinalherbs', 'Top 3 Medicinal Herbs', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3mosquitorepellent">
+    <img src="images/top3_mosquito_repellent.jpg" alt="Top 3 Mosquito Repellent Plants">
+    <h3>Top 3 Mosquito Repellent Plants</h3>
+    <p>Plants to keep mosquitoes away. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('top3mosquitorepellent', 'Top 3 Mosquito Repellent Plants', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top3wonderplants">
+    <img src="images/top3_wonder_plants.jpg" alt="Top 3 Wonder Plants Pack">
+    <h3>Top 3 Wonder Plants Pack</h3>
+    <p>Unique and beneficial plants. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('top3wonderplants', 'Top 3 Wonder Plants Pack', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top4allyearflowering">
+    <img src="images/top4_allyear_flowering.jpg" alt="Top 4 All Year Flowering Plants Pack">
+    <h3>Top 4 All Year Flowering Plants Pack</h3>
+    <p>Year-round blooming plants. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top4allyearflowering', 'Top 4 All Year Flowering Plants Pack', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top4healthyhomes">
+    <img src="images/top4_healthy_homes.jpg" alt="Top 4 Plants For Healthy Homes">
+    <h3>Top 4 Plants For Healthy Homes</h3>
+    <p>Plants for a healthier home. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top4healthyhomes', 'Top 4 Plants For Healthy Homes', 999)">Add to Cart</button>
+  </div>
+<div class="product-card" data-id="top4goodluckprosperity">
+    <img src="images/top4_goodluck_prosperity.jpg" alt="Top 4 Plants Goodluck Prosperity">
+    <h3>Top 4 Plants to Bring Goodluck and Prosperity</h3>
+    <p>Lucky plants for positivity and wealth. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top4goodluckprosperity', 'Top 4 Plants to Bring Goodluck and Prosperity', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5airpurifieroxygen">
+    <img src="images/top5_airpurifier_oxygen.jpg" alt="Top 5 Air Purifier Oxygen Plants">
+    <h3>Top 5 Air Purifier and Oxygen Enriching Plant Pack</h3>
+    <p>Plants for cleaner air and more oxygen. ₹1199</p>
+    <button class="add-to-cart" onclick="addToCart('top5airpurifieroxygen', 'Top 5 Air Purifier and Oxygen Enriching Plant Pack', 1199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5annualflowering">
+    <img src="images/top5_annual_flowering.jpg" alt="Top 5 Annual Flowering Plants">
+    <h3>Top 5 Annual Flowering Plants</h3>
+    <p>Seasonal blooms for vibrant gardens. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('top5annualflowering', 'Top 5 Annual Flowering Plants', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5floweringbalcony">
+    <img src="images/top5_flowering_balcony.jpg" alt="Top 5 Flowering Plants Balcony">
+    <h3>Top 5 Beautiful Flowering Plants for Balcony</h3>
+    <p>Perfect blooms for balcony gardens. ₹899</p>
+    <button class="add-to-cart" onclick="addToCart('top5floweringbalcony', 'Top 5 Beautiful Flowering Plants for Balcony', 899)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5easysucculent">
+    <img src="images/top5_easy_succulent.jpg" alt="Top 5 Easy Succulent Pack">
+    <h3>Top 5 Easy Succulent Pack</h3>
+    <p>Low-maintenance succulents for beginners. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('top5easysucculent', 'Top 5 Easy Succulent Pack', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5vastuplants">
+    <img src="images/top5_vastu_plants.jpg" alt="Top 5 Plants for Vastu">
+    <h3>Top 5 Plants for Vastu</h3>
+    <p>Plants to enhance positive energy. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top5vastuplants', 'Top 5 Plants for Vastu', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5attractmoney">
+    <img src="images/top5_attract_money.jpg" alt="Top 5 Plants to Attract Money">
+    <h3>Top 5 Plants to Attract Money</h3>
+    <p>Lucky plants for wealth and prosperity. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top5attractmoney', 'Top 5 Plants to Attract Money', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5goodluckplants">
+    <img src="images/top5_goodluck_plants.jpg" alt="Top 5 Plants to Bring Goodluck">
+    <h3>Top 5 Plants to Bring Goodluck</h3>
+    <p>Plants for positivity and fortune. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('top5goodluckplants', 'Top 5 Plants to Bring Goodluck', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5pollutionkiller">
+    <img src="images/top5_pollution_killer.jpg" alt="Top 5 Pollution Killer Plants Pack">
+    <h3>Top 5 Pollution Killer Plants Pack</h3>
+    <p>Plants to combat indoor pollution. ₹1199</p>
+    <button class="add-to-cart" onclick="addToCart('top5pollutionkiller', 'Top 5 Pollution Killer Plants Pack', 1199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5shadetolerant">
+    <img src="images/top5_shade_tolerant.jpg" alt="Top 5 Shade Tolerant Plants">
+    <h3>Top 5 Shade Tolerant Indoor Plants for Home</h3>
+    <p>Plants for low-light spaces. ₹899</p>
+    <button class="add-to-cart" onclick="addToCart('top5shadetolerant', 'Top 5 Shade Tolerant Indoor Plants for Home', 899)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="top5succulents">
+    <img src="images/top5_succulents.jpg" alt="Top 5 Succulents">
+    <h3>Top 5 Succulents</h3>
+    <p>Assorted succulents for decor. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('top5succulents', 'Top 5 Succulents', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treejasminemillingtonia">
+    <img src="images/tree_jasmine_millingtonia.jpg" alt="Tree Jasmine Millingtonia">
+    <h3>Tree Jasmine, Millingtonia Hortensis</h3>
+    <p>Fragrant tree with jasmine-like blooms. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('treejasminemillingtonia', 'Tree Jasmine, Millingtonia Hortensis', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treeandhraneem">
+    <img src="images/tree_andhra_neem.jpg" alt="Tree of Andhra Pradesh Neem">
+    <h3>Tree of Andhra Pradesh, Neem</h3>
+    <p>Medicinal neem tree. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('treeandhraneem', 'Tree of Andhra Pradesh, Neem', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treechandigarhmango">
+    <img src="images/tree_chandigarh_mango.jpg" alt="Tree of Chandigarh Mango">
+    <h3>Tree of Chandigarh, Mango</h3>
+    <p>Fruit-bearing mango tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('treechandigarhmango', 'Tree of Chandigarh, Mango', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treechhattisgarhsal">
+    <img src="images/tree_chhattisgarh_sal.jpg" alt="Tree of Chhattisgarh Sal">
+    <h3>Tree of Chhattisgarh, Sal</h3>
+    <p>Tall sal tree for shade. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('treechhattisgarhsal', 'Tree of Chhattisgarh, Sal', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treejharkhandsal">
+    <img src="images/tree_jharkhand_sal.jpg" alt="Tree of Jharkhand Sal">
+    <h3>Tree of Jharkhand, Sal</h3>
+    <p>Sturdy sal tree for landscaping. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('treejharkhandsal', 'Tree of Jharkhand, Sal', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treekarnatakasandalwood">
+    <img src="images/tree_karnataka_sandalwood.jpg" alt="Tree of Karnataka Sandalwood">
+    <h3>Tree of Karnataka, Sandalwood</h3>
+    <p>Aromatic sandalwood tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('treekarnatakasandalwood', 'Tree of Karnataka, Sandalwood', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treekeralacoconut">
+    <img src="images/tree_kerala_coconut.jpg" alt="Tree of Kerala Coconut">
+    <h3>Tree of Kerala, Coconut</h3>
+    <p>Tropical coconut tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('treekeralacoconut', 'Tree of Kerala, Coconut', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treelakshadweepjackfruit">
+    <img src="images/tree_lakshadweep_jackfruit.jpg" alt="Tree of Lakshadweep Jack Fruit">
+    <h3>Tree of Lakshadweep, Jack Fruit</h3>
+    <p>Large fruit-bearing jackfruit tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('treelakshadweepjackfruit', 'Tree of Lakshadweep, Jack Fruit', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treemadhyapradeshbanyan">
+    <img src="images/tree_madhya_pradesh_banyan.jpg" alt="Tree of Madhya Pradesh Banyan">
+    <h3>Tree of Madhya Pradesh, Banyan</h3>
+    <p>Majestic banyan tree for shade. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('treemadhyapradeshbanyan', 'Tree of Madhya Pradesh, Banyan', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treemaharashtramango">
+    <img src="images/tree_maharashtra_mango.jpg" alt="Tree of Maharashtra Mango">
+    <h3>Tree of Maharashtra, Mango</h3>
+    <p>Fruit-bearing mango tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('treemaharashtramango', 'Tree of Maharashtra, Mango', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treeodishabanyan">
+    <img src="images/tree_odisha_banyan.jpg" alt="Tree of Odisha Banyan">
+    <h3>Tree of Odisha, Banyan</h3>
+    <p>Wide-spreading banyan tree. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('treeodishabanyan', 'Tree of Odisha, Banyan', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treepuducherrybilva">
+    <img src="images/tree_puducherry_bilva.jpg" alt="Tree of Puducherry Bilva">
+    <h3>Tree of Puducherry, Bilva</h3>
+    <p>Sacred bilva tree for rituals. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('treepuducherrybilva', 'Tree of Puducherry, Bilva', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treerajasthanshami">
+    <img src="images/tree_rajasthan_shami.jpg" alt="Tree of Rajasthan Shami">
+    <h3>Tree of Rajasthan, Shami</h3>
+    <p>Culturally significant shami tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('treerajasthanshami', 'Tree of Rajasthan, Shami', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treeuttarpradeshashok">
+    <img src="images/tree_uttar_pradesh_ashok.jpg" alt="Tree of Uttar Pradesh Ashok">
+    <h3>Tree of Uttar Pradesh, Ashok</h3>
+    <p>Ornamental ashok tree. ₹599</p>
+    <button class="add-to-cart" onclick="addToCart('treeuttarpradeshashok', 'Tree of Uttar Pradesh, Ashok', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="treewestbengalsaptaparni">
+    <img src="images/tree_west_bengal_saptaparni.jpg" alt="Tree of West Bengal Saptaparni">
+    <h3>Tree of West Bengal, Saptaparni</h3>
+    <p>Fragrant saptaparni tree. ₹699</p>
+    <button class="add-to-cart" onclick="addToCart('treewestbengalsaptaparni', 'Tree of West Bengal, Saptaparni', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="turmericplant">
+    <img src="images/turmeric_plant.jpg" alt="Turmeric Plant">
+    <h3>Turmeric, Haldi Plant, Curcuma longa</h3>
+    <p>Medicinal and culinary herb. ₹249</p>
+    <button class="add-to-cart" onclick="addToCart('turmericplant', 'Turmeric, Haldi Plant, Curcuma longa', 249)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="umbrellaplant">
+    <img src="images/umbrella_plant.jpg" alt="Umbrella Plant">
+    <h3>Umbrella Plant, Cyperus Papyrus</h3>
+    <p>Tall plant with umbrella-like foliage. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('umbrellaplant', 'Umbrella Plant, Cyperus Papyrus', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="variegatedcreepingfig">
+    <img src="images/variegated_creeping_fig.jpg" alt="Variegated Creeping Fig">
+    <h3>Variegated Creeping Fig, Ficus pumila</h3>
+    <p>Trailing plant with variegated leaves. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('variegatedcreepingfig', 'Variegated Creeping Fig, Ficus pumila', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="variegatedelephantbush">
+    <img src="images/variegated_elephant_bush.jpg" alt="Variegated Elephant Bush">
+    <h3>Variegated Elephant Bush, Jade Plant Variegated - Succulent Plant</h3>
+    <p>Variegated succulent for decor. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('variegatedelephantbush', 'Variegated Elephant Bush, Jade Plant Variegated - Succulent Plant', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="variegatedjadeplant">
+    <img src="images/variegated_jade_plant.jpg" alt="Variegated Jade Plant">
+    <h3>Variegated Jade Plant, Crassula ovata - Succulent Plant</h3>
+    <p>Lucky variegated jade succulent. ₹349</p>
+    <button class="add-to-cart" onclick="addToCart('variegatedjadeplant', 'Variegated Jade Plant, Crassula ovata - Succulent Plant', 349)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="variegatedspiderlily">
+    <img src="images/variegated_spider_lily.jpg" alt="Variegated Spider Lily">
+    <h3>Variegated Spider Lily</h3>
+    <p>Striking variegated foliage and blooms. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('variegatedspiderlily', 'Variegated Spider Lily', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="whitesandalwood">
+    <img src="images/white_sandalwood.jpg" alt="White Sandalwood Tree">
+    <h3>White Sandalwood Tree, Chandan Tree</h3>
+    <p>Aromatic white sandalwood tree. ₹999</p>
+    <button class="add-to-cart" onclick="addToCart('whitesandalwood', 'White Sandalwood Tree, Chandan Tree', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="wildasparagus">
+    <img src="images/wild_asparagus.jpg" alt="Wild Asparagus">
+    <h3>Wild Asparagus, Shatavari</h3>
+    <p>Medicinal herb for wellness. ₹299</p>
+    <button class="add-to-cart" onclick="addToCart('wildasparagus', 'Wild Asparagus, Shatavari', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="wonderfulorchidpack">
+    <img src="images/wonderful_orchid_pack.jpg" alt="Wonderful Orchid Pack">
+    <h3>Wonderful Orchid Plants - Pack of 2</h3>
+    <p>Two stunning orchid varieties. ₹799</p>
+    <button class="add-to-cart" onclick="addToCart('wonderfulorchidpack', 'Wonderful Orchid Plants - Pack of 2', 799)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="wrightiareligiosa">
+    <img src="images/wrightia_religiosa.jpg" alt="Wrightia Religiosa">
+    <h3>Wrightia Religiosa</h3>
+    <p>Fragrant blooms for gardens. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('wrightiareligiosa', 'Wrightia Religiosa', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="zzblack">
+    <img src="images/zz_black.jpg" alt="ZZ Black">
+    <h3>Zamioculcas zamiifolia, ZZ Black</h3>
+    <p>Glossy black foliage for indoors. ₹499</p>
+    <button class="add-to-cart" onclick="addToCart('zzblack', 'Zamioculcas zamiifolia, ZZ Black', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="zzplant">
+    <img src="images/zz_plant.jpg" alt="ZZ Plant">
+    <h3>Zamioculcas zamiifolia, ZZ Plant</h3>
+    <p>Low-maintenance indoor plant. ₹399</p>
+    <button class="add-to-cart" onclick="addToCart('zzplant', 'Zamioculcas zamiifolia, ZZ Plant', 399)">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="zinniayellow">
+    <img src="images/zinnia_yellow.jpg" alt="Zinnia Yellow">
+    <h3>Zinnia (Yellow)</h3>
+    <p>Bright yellow blooms for gardens. ₹199</p>
+    <button class="add-to-cart" onclick="addToCart('zinniayellow', 'Zinnia (Yellow)', 199)">Add to Cart</button>
+  </div>
+
 </section>
 
 <footer>
@@ -1543,6 +3637,25 @@
     localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${name} has been added to your cart!`);
   }
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const productCards = document.querySelectorAll('.product-card');
+
+  // Show all products initially
+  productCards.forEach(card => card.classList.add('visible'));
+
+  searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    productCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const description = card.querySelector('p').textContent.toLowerCase();
+      const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+
+      card.classList.toggle('visible', matchesSearch);
+    });
+  });
+});
 </script>
 </body>
 </html>

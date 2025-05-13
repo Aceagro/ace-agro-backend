@@ -1,0 +1,185 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Ace Agro Tech, your partner in online nursery, organic farming, and rice export. Discover our mission and expertise.">
+    <title>About Us - Ace Agro Tech</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            background-color: #1b5e20;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #c8e6c9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .about-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .about-section h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        .about-section h3 {
+            color: #1b5e20;
+            margin-top: 20px;
+        }
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+        footer {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ace Agro Tech</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="about-section">
+            <h2>About Ace Agro Tech</h2>
+            <p>Founded in 2023, ACE Agro Tech is a dynamic agri-business headquartered in Burdwan, West Bengal, India, committed to revolutionizing sustainable agriculture and global trade. We specialize in three key areas: an online nursery for premium plants, organic farming of high-quality produce, and the export of superior Miniket rice sourced from the fertile regions of Burdwan and Hooghly districts.</p>
+            
+            <h3>Our Expertise</h3>
+            <p><strong>Online Nursery:</strong> Through our intuitive e-commerce platform, we provide a diverse selection of plants, including fruit trees, ornamental flowers, and herbs. Each plant is nurtured with care, ensuring healthy delivery to gardening enthusiasts and landscapers worldwide.</p>
+            <p><strong>Organic Farming:</strong> We champion eco-friendly farming, growing organic vegetables, fruits, and grains without synthetic pesticides or fertilizers. Our farms adhere to strict organic standards, delivering fresh, chemical-free produce for health-conscious consumers.</p>
+            <p><strong>Rice Export:</strong> We export premium Miniket rice, a sought-after non-basmati variety known for its slender grains, subtle aroma, and fluffy texture. Sourced from trusted farmers in Burdwan and Hooghly, our rice is meticulously processed, sortexed, and packed to meet global standards, catering to markets in Africa, South East Asia, and the Middle East.</p>
+            
+            <h3>Why Choose ACE Agro Tech?</h3>
+            <p>Rooted in West Bengal’s rich agricultural legacy, we blend traditional expertise with modern innovation to ensure quality and sustainability. Our Miniket rice boasts a moisture content of max 14% and less than 2% broken grains, guaranteeing export-ready excellence. We ship globally from Kolkata Sea Port within 7 days, offering flexible packaging in 10kg, 25kg, or 50kg bags.</p>
+            <p>At ACE Agro Tech, we are dedicated to empowering farmers, promoting green living, and delivering Bengal’s finest to the world. Join us in our mission to grow, nourish, and trade sustainably!</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Ace Agro Tech. All rights reserved.</p>
+    </footer>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b70770e8e544d2',t:'MTc0NjUxOTMxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

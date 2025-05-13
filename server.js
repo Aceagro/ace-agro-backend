@@ -10,20 +10,29 @@ const csv = require('csv-parser');
 const app = express();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'https://aceagrotech.netlify.app', // Allow only your Netlify domain
+  methods: ['GET', 'POST'], // Allow only GET and POST requests
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1); // Exit if connection fails
-  });
+// Connect to MongoDB with retry logic
+const connectWithRetry = () => {
+  mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => {
+      console.error('MongoDB connection error:', err.message);
+      console.log('Retrying MongoDB connection in 5 seconds...');
+      setTimeout(connectWithRetry, 5000); // Retry after 5 seconds
+    });
+};
+connectWithRetry();
 
 // Define Order Schema
 const orderSchema = new mongoose.Schema({
@@ -156,6 +165,48 @@ app.post('/api/orders', async (req, res) => {
       res.status(500).json({ message: 'Internal server error', error: error.message });
     }
   }
+});
+
+// Endpoint to handle custom quote submission
+app.post('/submit-quote', async (req, res) => {
+  try {
+    const { index_name, index_email, index_requirements, index_phone } = req.body;
+
+    // Validate required fields
+    if (!index_name || !index_email || !index_requirements) {
+      return res.status(400).json({ message: 'Missing required fields: name, email, and requirements are required' });
+    }
+
+    // Email content for the quote request
+    const emailContent = `
+      New Custom Quote Request - Ace Agro Tech
+
+      Date: ${new Date().toLocaleString()}
+      Name: ${index_name}
+      Email: ${index_email}
+      Phone: ${index_phone || 'Not provided'}
+      Requirements: ${index_requirements}
+    `;
+
+    // Send email using the existing transporter
+    await transporter.sendMail({
+      from: '"Ace Agro Tech" <' + process.env.EMAIL_USER + '>',
+      to: 'contact.ace.agro@gmail.com', // Send to your business email
+      subject: 'New Custom Quote Request - Ace Agro Tech',
+      text: emailContent,
+    });
+    console.log('Quote request email sent successfully');
+
+    res.status(200).json({ message: 'Quote request sent successfully' });
+  } catch (error) {
+    console.error('Error sending quote request email:', error.message);
+    res.status(500).json({ message: 'Failed to send quote request', error: error.message });
+  }
+});
+
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
 // Start the Server
